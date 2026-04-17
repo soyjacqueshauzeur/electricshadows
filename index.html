@@ -72,6 +72,53 @@
         .more a:hover {
             color: #ff8c42;
         }
+        .other {
+            margin-top: 1rem;
+        }
+        .other ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        li a {
+            color: hsla(340, 2%, 45%, 1);
+            text-align: center;
+        }
+        .other {
+            border-radius: 2em;
+            border: 2px solid hsla(340, 2%, 45%, 1);
+            color: hsla(340, 2%, 45%, 1);
+            margin-top: 3em;
+            padding: 5px;
+            width: 280px;
+            text-align: center;
+            li {
+                margin-top: 1em;
+                margin-bottom: 1em;
+                a {
+                    color: hsla(340, 2%, 45%, 1);
+                    text-decoration: none;
+                    transition: color 0.3s ease;
+                    font-size: 0.85rem;
+                    &:hover {
+                        color: #ff8c42;
+                    }
+                }
+            }
+        }
+        .other details summary {
+            list-style: none;
+            cursor: pointer;
+        }
+        .other details summary::-webkit-details-marker {
+            display: none;
+        }
+        .other {
+            transition: border-color 0.3s ease, color 0.3s ease;
+        }
+        .other:hover, .other:focus-within {
+            border-color: #ff8c42;
+            color: #ff8c42;
+        }
         @media (max-width: 540px) {
             body {
                 padding: 1rem;
@@ -104,8 +151,18 @@
                 justify-content: center;
                 gap: 1rem;
             }
+            .other {
+                margin-top: 3rem;
+            }
+            .other ul {
+                list-style: none;
+                padding-left: 0;
+            }
+            .other li::before {
+                content: " ";
+            }
         }
-    </style>
+        </style>
 </head>
 <body>
     <div class="logo-container">
@@ -114,10 +171,17 @@
         <div class="tagline">[<a href="./sound/index.html" target="_blank" rel="next">Sound</a>, <a href="./biorest/index.html" target="_blank" rel="next">Bio-Rest</a>, <a href="./ruso/index.html" target="_blank" rel="next">Russian</a>] <span class="division"><strong>Division</strong></span></div>
     </div>
     <div class="more">
-        <a href="#">Proyectos</a>
+        <a href="#">Proyectos / Clientes</a>
         <a href="#">Blog</a>
         <a href="#">Contacto</a>
     </div>
-    
+    <div class="other">
+        <details>
+            <summary style="font-size: 2em;">+</summary>
+            <ul>
+                <li><a href="./maderoterapia/index.html">Maderoterapia</a></li>
+            </ul>
+        </details>
+    </div>
 </body>
 </html>
