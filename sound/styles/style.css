@@ -1,0 +1,76 @@
+.pagos {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 40px;
+    margin-top: 30px;
+    margin-bottom: 50px;
+}
+
+@media (min-width: 1024px) {
+    .pagos {
+        gap: 85px;
+    }
+}
+
+.pagos-img {
+    width: 100px;
+}
+
+.pagos-text {
+    font-size: 14px;
+    color: hsla(25, 0%, 56%, 1);
+    margin-top: 8px;
+}
+
+.pagos-link {
+    display: block;
+    margin-top: 8px;
+    font-size: 14px;
+    color: hsla(25, 0%, 56%, 1);
+}
+
+.modal-support-text {
+    color: hsla(0, 100%, 56%, 1);
+    margin-top: 1em;
+}
+
+.hero-image-wrapper {
+    width: 35em;
+    max-width: 100%;
+}
+
+.gradient-background {
+    background: radial-gradient(circle at 30% 70%, hsla(348, 98%, 59%, 0.15) 0%, transparent 50%), radial-gradient(circle at 70% 30%, hsla(178, 98%, 55%, 0.15) 0%, transparent 50%);
+}
+
+.text-center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.highlight {
+    background-color: hsla(270, 80%, 55%, 1);
+    color: hsla(0, 0%, 100%, 1);
+    padding: 5px;
+}
+
+/* https://remixicon.com/ */
+i[class*="ri-"] {
+  font-size: 1.5em;
+}
+
+.redes {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.redes > .flex {
+    flex-wrap: wrap;
+}
