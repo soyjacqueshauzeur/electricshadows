@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Electric Shadows</title>
+    <link rel="stylesheet" href="./styles/style.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: #242021;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Space Grotesk', sans-serif;
+            overflow: hidden;
+        }
+        .logo-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+        }
+        .logo {
+            width: 400px;
+            max-width: 90vw;
+            height: auto;
+        }
+        .brand-text {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #ff8c42;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            text-shadow: 0 0 30px rgba(255, 140, 66, 0.5);
+            text-align: center;
+        }
+        .tagline {
+            font-size: 1rem;
+            color: hsla(340, 2%, 67%, 1);
+            letter-spacing: 0.5em;
+            text-transform: uppercase;
+        }
+        .tagline a {
+            color: hsla(340, 2%, 67%, 1);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .tagline a:hover {
+            color: #ff8c42;
+        }
+        .division {
+            color: hsla(270, 80%, 55%, 1);
+        }
+        .more {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        .more a {
+            color: hsla(340, 2%, 45%, 1);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.3s ease;
+        }
+        .more a:hover {
+            color: #ff8c42;
+        }
+        @media (max-width: 540px) {
+            body {
+                padding: 1rem;
+            }
+            .logo-container {
+                gap: 1.5rem;
+                width: 100%;
+                text-align: center;
+            }
+            .logo {
+                width: 200px;
+                max-width: 70vw;
+            }
+            .brand-text {
+                font-size: 1.5rem;
+                letter-spacing: 0.08em;
+                text-align: center;
+                display: block;
+                width: 100%;
+            }
+            .tagline {
+                font-size: 0.7rem;
+                letter-spacing: 0.12em;
+                text-align: center;
+                display: block;
+                width: 100%;
+            }
+            .more {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="logo-container">
+        <img src="./images/g185r.png" alt="Electric Shadows" class="logo">
+        <div class="brand-text">Electric Shadows</div>
+        <div class="tagline">[<a href="./sound/index.html" target="_blank" rel="next">Sound</a>, <a href="./biorest/index.html" target="_blank" rel="next">Bio-Rest</a>, <a href="./ruso/index.html" target="_blank" rel="next">Russian</a>] <span class="division"><strong>Division</strong></span></div>
+    </div>
+    <div class="more">
+        <a href="#">Proyectos</a>
+        <a href="#">Blog</a>
+        <a href="#">Contacto</a>
+    </div>
+    
+</body>
+</html>
