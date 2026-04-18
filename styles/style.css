@@ -1,16 +1,16 @@
 :root {
-    --accent-color: hsla(270, 80%, 55%, 1);
+    --accent-color: hsla(20, 90%, 55%, 1);
     --bg-color: #242021;
-    --primary-alpha: hsla(165, 100%, 63%, 0.5);
-    --primary-color: hsla(165, 100%, 63%,1);
+    --primary-alpha: hsla(168, 100%, 63%, 0.5);
+    --primary-color: hsla(168, 100%, 63%,1);
     --text-dark: hsla(340, 2%, 45%, 1);
     --text-muted: hsla(340, 2%, 67%, 1);
 
     --fs-brand: 3rem;
     --fs-tagline: 1rem;
-    --fs-link: 0.85rem;
+    --fs-link: 0.95rem;
     --fs-brand-mobile: 1.5rem;
-    --fs-tagline-mobile: 0.7rem;
+    --fs-tagline-mobile: 0.8rem;
 
     --ls-brand: 0.3em;
     --ls-tagline: 0.5em;
@@ -42,7 +42,7 @@ body {
 .logo {
     height: auto;
     max-width: 90vw;
-    width: 400px;
+    width: 280px;
 }
 .brand-text {
     color: var(--primary-color);
@@ -144,7 +144,7 @@ li a {
     }
     .logo {
         max-width: 70vw;
-        width: 280px;
+        width: 240px;
     }
     .brand-text {
         display: block;
