@@ -136,8 +136,8 @@ li a {
     transition: border-color 0.3s ease, color 0.3s ease;
 }
 .other:hover, .other:focus-within {
-    border-color: var(--primary-color);
-    color: var(--primary-color);
+    border-color: var(--accent-color);
+    color: var(--accent-color);
 }
 @media (max-width: 540px) {
     body {
