@@ -1,3 +1,12 @@
+:root {
+    --color-gray-text: hsla(25, 0%, 56%, 1);
+    --color-red-support: hsla(0, 100%, 56%, 1);
+    --color-gradient-pink: hsla(348, 98%, 59%, 0.15);
+    --color-gradient-cyan: hsla(178, 98%, 55%, 0.15);
+    --color-highlight-bg: hsla(270, 80%, 55%, 1);
+    --color-white: hsla(0, 0%, 100%, 1);
+}
+
 .pagos {
     display: flex;
     justify-content: center;
@@ -20,7 +29,7 @@
 
 .pagos-text {
     font-size: 14px;
-    color: hsla(25, 0%, 56%, 1);
+    color: var(--color-gray-text);
     margin-top: 8px;
 }
 
@@ -28,11 +37,11 @@
     display: block;
     margin-top: 8px;
     font-size: 14px;
-    color: hsla(25, 0%, 56%, 1);
+    color: var(--color-gray-text);
 }
 
 .modal-support-text {
-    color: hsla(0, 100%, 56%, 1);
+    color: var(--color-red-support);
     margin-top: 1em;
 }
 
@@ -42,7 +51,7 @@
 }
 
 .gradient-background {
-    background: radial-gradient(circle at 30% 70%, hsla(348, 98%, 59%, 0.15) 0%, transparent 50%), radial-gradient(circle at 70% 30%, hsla(178, 98%, 55%, 0.15) 0%, transparent 50%);
+    background: radial-gradient(circle at 30% 70%, var(--color-gradient-pink) 0%, transparent 50%), radial-gradient(circle at 70% 30%, var(--color-gradient-cyan) 0%, transparent 50%);
 }
 
 .text-center {
@@ -53,14 +62,14 @@
 }
 
 .highlight {
-    background-color: hsla(270, 80%, 55%, 1);
-    color: hsla(0, 0%, 100%, 1);
+    background-color: var(--color-highlight-bg);
+    color: var(--color-white);
     padding: 5px;
 }
 
 /* https://remixicon.com/ */
 i[class*="ri-"] {
-  font-size: 1.5em;
+    font-size: 1.5em;
 }
 
 .redes {
@@ -71,6 +80,6 @@ i[class*="ri-"] {
     width: 100%;
 }
 
-.redes > .flex {
+.redes>.flex {
     flex-wrap: wrap;
 }
