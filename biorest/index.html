@@ -688,7 +688,7 @@
         if (btn.closest('#checkoutModal')) return;
         
         const text = btn.textContent.toLowerCase();
-        if (text.includes('comprar') || text.includes('evolucionar') || text.includes('whatsapp')) {
+        if (text.includes('comprar') || text.includes('evolucionar') || text.includes('whatsapp') || text.includes('descargar')) {
             btn.addEventListener('click', (e) => {
                 e.preventDefault();
                 e.stopPropagation();
