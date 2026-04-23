@@ -612,10 +612,11 @@
             </form>
         </div>
     </div>
-
     <script>
     document.getElementById('waForm').addEventListener('submit', function(e) {
         e.preventDefault();
+        
+        // 1. Recopilar datos del formulario
         const name = document.getElementById('waName').value;
         const id = document.getElementById('waId').value;
         const phone = document.getElementById('waPhone').value;
@@ -625,31 +626,63 @@
         const address = document.getElementById('waAddress').value;
         const notes = document.getElementById('waNotes').value;
 
+        // 2. Preparar el JSON para Google Apps Script
+        const scriptData = {
+            timestamp: new Date().toISOString(),
+            nombre: name,
+            documento: id,
+            telefono: phone,
+            email: email,
+            departamento: dept,
+            ciudad: city,
+            direccion: address,
+            notas: notes ? notes : 'Ninguna',
+            producto: 'Pillow: SYNAPTIC SLEEP 5-Z',
+            precioTotal: '$84.000 COP'
+        };
+
+        // --- REEMPLAZA ESTA URL CON LA DE TU WEB APP PUBLICADA EN GOOGLE ---
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw2_YaQVwd23QhL1ziPiQP0BMSkq--zIyjlhEaUCcsfrpwe9h95u_tg0m9AJ-umVRM/exec';
+
+        // 3. Enviar datos a Google Sheets sin recargar ni bloquear la página
+        fetch(GOOGLE_SCRIPT_URL, {
+            method: 'POST',
+            mode: 'no-cors', // Fundamental para evitar errores de CORS en el navegador
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(scriptData)
+        }).catch(error => console.error('Error al guardar en Sheets:', error));
+
+        // 4. Generar y abrir el mensaje de WhatsApp
         const message = `Hola, quiero comprar: *Pillow: SYNAPTIC SLEEP 5-Z*
-*Precio Total:* $84.000 COP
+    *Precio Total:* $84.000 COP
 
-*Datos Personales:*
-- Nombre y apellido: ${name}
-- Documento: ${id}
-- WhatsApp/Celular: ${phone}
-- Email: ${email}
+    *Datos Personales:*
+    - Nombre y apellido: ${name}
+    - Documento: ${id}
+    - WhatsApp/Celular: ${phone}
+    - Email: ${email}
 
-*Datos de Envío:*
-- Departamento: ${dept}
-- Ciudad: ${city}
-- Dirección: ${address}
-- Indicaciones: ${notes ? notes : 'Ninguna'}
+    *Datos de Envío:*
+    - Departamento: ${dept}
+    - Ciudad: ${city}
+    - Dirección: ${address}
+    - Indicaciones: ${notes ? notes : 'Ninguna'}
 
-Los medios de pago son: (Tarjeta de cŕedito, débito, nequi, daviplata, PSE, NuBank) `;
+    Los medios de pago son: (Tarjeta de cŕedito, débito, nequi, daviplata, PSE, NuBank) `;
 
         const encodedMessage = encodeURIComponent(message);
         const waUrl = `https://wa.me/573507402009?text=${encodedMessage}`;
         
         window.open(waUrl, '_blank');
         document.getElementById('checkoutModal').style.display = 'none';
+        
+        // Opcional: Limpiar el formulario tras enviar
+        this.reset(); 
     });
 
-    // Añadir el comportamiento de abrir modal a los botones existentes (excluyendo los del modal mismo)
+    // Añadir el comportamiento de abrir modal a los botones existentes
     document.querySelectorAll('button').forEach(btn => {
         // Ignorar cualquier botón que esté dentro del modal
         if (btn.closest('#checkoutModal')) return;
@@ -658,7 +691,7 @@ Los medios de pago son: (Tarjeta de cŕedito, débito, nequi, daviplata, PSE, Nu
         if (text.includes('comprar') || text.includes('evolucionar') || text.includes('whatsapp')) {
             btn.addEventListener('click', (e) => {
                 e.preventDefault();
-                e.stopPropagation(); // Evitar que el click se propague al documento
+                e.stopPropagation();
                 document.getElementById('checkoutModal').style.display = 'flex';
             });
         }
