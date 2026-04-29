@@ -132,6 +132,4 @@ git add -A && git commit -m 'JSON_AQUI' && git push
 3. **Anidar por web** - cada web modificada es una propiedad en `webs`
 4. **Anidar por archivo** - dentro de cada web, listar archivos modificados con sus cambios
 5. **Resumen conciso** - máximo 80 caracteres
-6. **Cambios en array** - cada cambio es un string descriptivo
-
-# Pregunta si quiero hacer un git push
+6. **Cambios en array** - cada cambio es un string descriptivo!
