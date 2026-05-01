@@ -133,6 +133,7 @@
 	</script>
 
 	<link rel="shortcut icon" type="image/x-icon" href="images/favicon.png">
+	<link rel="manifest" href="/manifest.json" />
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1158,5 +1159,19 @@
     <script src="js/jquery.mb.YTPlayer.min.js"></script>
     <script src="js/wow.min.js"></script>
     <script src="js/function.js"></script>
+    <!-- Service Worker Registration -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js')
+            .then(registration => {
+              console.log('ServiceWorker registrado con éxito con alcance: ', registration.scope);
+            })
+            .catch(error => {
+              console.log('Error al registrar el ServiceWorker: ', error);
+            });
+        });
+      }
+    </script>
 </body>
 </html>
