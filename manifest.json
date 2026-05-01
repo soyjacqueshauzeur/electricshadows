@@ -2,8 +2,9 @@
   "name": "Electric Shadows | Online business",
   "short_name": "Electric Shadows",
   "description": "E-commerce y plataforma educativa online para tu bienestar y entretenimiento.",
-  "start_url": "/?source=pwa",
+  "start_url": "/",
   "display": "standalone",
+  "scope": "/",
   "background_color": "#0a0a0a",
   "theme_color": "#0a0a0a",
   "icons": [
