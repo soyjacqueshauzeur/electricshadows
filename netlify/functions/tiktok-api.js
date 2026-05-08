@@ -26,20 +26,36 @@ exports.handler = async (event, context) => {
   }
 
   try {
+    const eventData = {
+      event: body.event_name,
+      event_id: body.event_id,
+      event_time: Math.floor(Date.now() / 1000),
+      user: {
+        email: crypto.createHash('sha256').update(body.user_email.toLowerCase().trim()).digest('hex'),
+        ip: event.headers['x-nf-client-connection-ip'] || '127.0.0.1',
+        user_agent: event.headers['user-agent']
+      },
+      page: { url: body.page_url }
+    };
+
+    if (body.content_id) {
+      eventData.properties = {
+        contents: [{
+          content_id: body.content_id,
+          content_name: body.content_name || '',
+          content_type: body.content_type || 'product',
+          price: body.value || 0,
+          quantity: body.quantity || 1
+        }],
+        value: body.value || 0,
+        currency: body.currency || 'USD'
+      };
+    }
+
     const tiktokPayload = {
       event_source_id: "D7T48QBC77U471PH6PA0",
       event_source: "web",
-      data: [{
-        event: body.event_name,
-        event_id: body.event_id,
-        event_time: Math.floor(Date.now() / 1000),
-        user: {
-          email: crypto.createHash('sha256').update(body.user_email.toLowerCase().trim()).digest('hex'),
-          ip: event.headers['x-nf-client-connection-ip'] || '127.0.0.1',
-          user_agent: event.headers['user-agent']
-        },
-        page: { url: body.page_url }
-      }]
+      data: [eventData]
     };
 
     if (body.test_event_code) {
