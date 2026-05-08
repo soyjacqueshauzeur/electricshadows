@@ -28,17 +28,17 @@ exports.handler = async (event, context) => {
     const response = await axios.post('https://business-api.tiktok.com/open_api/v1.3/event/track/', {
       event_source_id: "D7T48QBC77U471PH6PA0",
       event_source: "web",
-      event: body.event_name,
-      event_id: body.event_id,
-      event_time: Math.floor(Date.now() / 1000),
-      context: {
+      data: [{
+        event: body.event_name,
+        event_id: body.event_id,
+        event_time: Math.floor(Date.now() / 1000),
         user: {
-            email: body.user_email,
-            ip: event.headers['x-nf-client-connection-ip'] || '127.0.0.1',
-            user_agent: event.headers['user-agent']
+          email: body.user_email,
+          ip: event.headers['x-nf-client-connection-ip'] || '127.0.0.1',
+          user_agent: event.headers['user-agent']
         },
         page: { url: body.page_url }
-      }
+      }]
     }, {
       timeout: 8000,
       headers: {
