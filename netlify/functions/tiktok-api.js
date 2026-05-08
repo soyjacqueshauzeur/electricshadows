@@ -33,6 +33,7 @@ exports.handler = async (event, context) => {
         event: body.event_name,
         event_id: body.event_id,
         event_time: Math.floor(Date.now() / 1000),
+        test_event_code: body.test_event_code || null,
         user: {
           email: crypto.createHash('sha256').update(body.user_email.toLowerCase().trim()).digest('hex'),
           ip: event.headers['x-nf-client-connection-ip'] || '127.0.0.1',
