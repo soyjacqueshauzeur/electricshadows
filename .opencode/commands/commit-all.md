@@ -1,9 +1,9 @@
 ---
-description: Group changes into semantic commits and push the current branch.
+description: Group changes into semantic commits. Push must be done manually.
 agent: build
 ---
 
-# Commit All - Group changes into semantic commits and push
+# Commit All - Group changes into semantic commits
 
 Optional context for commit messages: ``
 
@@ -32,6 +32,5 @@ Flow:
 3. For each group:
    - Add only the files for that group with `git add <files>`.
    - Create the commit with a semantic message.
-4. Once all commits have been created, run:
-   `git push`
-5. When finished, summarize the commits created and the branch that was pushed.
+4. Once all commits have been created, STOP. Do NOT run `git push`.
+5. When finished, summarize the commits created. Remind the user that push is manual.

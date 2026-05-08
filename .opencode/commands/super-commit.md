@@ -1,5 +1,5 @@
 ---
-description: Agrupa los cambios en commits semánticos y empuja la rama actual.
+description: Agrupa los cambios en commits semánticos. El push es manual.
 agent: build
 ---
 
@@ -127,7 +127,7 @@ Todos los commits deben seguir el formato JSON anidado según la estructura de l
 ## Comando para ejecutar
 
 ```bash
-git add -A && git commit -m 'JSON_AQUI' && git push
+git add -A && git commit -m 'JSON_AQUI'
 ```
 
 ## Reglas
