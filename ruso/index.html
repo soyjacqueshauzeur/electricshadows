@@ -1170,5 +1170,27 @@
       }
     </script>
     <script src="/tiktok-tracker.js"></script>
+    <script>
+      sendTikTokEvent('ViewContent', {
+        id: 'RUS_001',
+        name: 'Curso de Ruso | Compilación A1-A2',
+        price: 10,
+        currency: 'USD'
+      });
+
+      document.querySelectorAll('a[href="https://mpago.li/2JVxi1W"]').forEach(function(link) {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          var href = this.href;
+          sendTikTokEvent('AddToCart', {
+            id: 'RUS_001',
+            name: 'Curso de Ruso | Compilación A1-A2',
+            price: 10,
+            currency: 'USD'
+          });
+          setTimeout(function() { window.location.href = href; }, 500);
+        });
+      });
+    </script>
 </body>
 </html>
