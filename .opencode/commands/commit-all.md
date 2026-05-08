@@ -1,4 +1,9 @@
-Group all current changes into meaningful semantic commits and push the current branch.
+---
+description: Group changes into semantic commits and push the current branch.
+agent: build
+---
+
+# Commit All - Group changes into semantic commits and push
 
 Optional context for commit messages: ``
 

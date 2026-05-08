@@ -1,3 +1,8 @@
+---
+description: Agrupa los cambios en commits semánticos y empuja la rama actual.
+agent: build
+---
+
 # Commits JSON - Guía de Uso
 
 1. Realiza: git add -A
