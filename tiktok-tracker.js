@@ -11,7 +11,7 @@ function sendTikTokEvent(eventName, productData) {
     payload.content_name = productData.name || '';
     payload.content_type = productData.type || 'product';
     payload.value = productData.price || 0;
-    payload.currency = productData.currency || 'USD';
+    if (productData.currency) payload.currency = productData.currency;
     payload.quantity = productData.quantity || 1;
   }
 
