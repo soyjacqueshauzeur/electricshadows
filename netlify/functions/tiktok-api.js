@@ -1,4 +1,5 @@
 const axios = require('axios');
+const crypto = require('crypto');
 
 exports.handler = async (event, context) => {
   // 1. Cabeceras de seguridad para evitar bloqueos del navegador (CORS)
@@ -33,7 +34,7 @@ exports.handler = async (event, context) => {
         event_id: body.event_id,
         event_time: Math.floor(Date.now() / 1000),
         user: {
-          email: body.user_email,
+          email: crypto.createHash('sha256').update(body.user_email.toLowerCase().trim()).digest('hex'),
           ip: event.headers['x-nf-client-connection-ip'] || '127.0.0.1',
           user_agent: event.headers['user-agent']
         },
