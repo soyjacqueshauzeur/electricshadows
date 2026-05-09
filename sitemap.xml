@@ -1,0 +1,492 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+
+  <!-- ===== ROOT ===== -->
+  <url>
+    <loc>https://electricshadows.website/</loc>
+    <lastmod>2026-05-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://electricshadows.website/images/g185r.png</image:loc>
+      <image:title>Electric Shadows Logo</image:title>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://electricshadows.website/ecommerce.html</loc>
+    <lastmod>2026-05-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://electricshadows.website/politicas.html</loc>
+    <lastmod>2026-05-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <!-- ===== SOUND DIVISION ===== -->
+  <url>
+    <loc>https://electricshadows.website/sound/</loc>
+    <lastmod>2026-05-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://electricshadows.website/sound/images/g185r.png</image:loc>
+      <image:title>Sound Division Logo</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://electricshadows.website/sound/images/hAtXf.jpg</image:loc>
+      <image:title>Sound Division Hero</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://electricshadows.website/sound/images/oleg.avif</image:loc>
+      <image:title>Testimonio Oleg</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://electricshadows.website/sound/images/juliana.avif</image:loc>
+      <image:title>Testimonio Juliana</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://electricshadows.website/sound/images/sofi.avif</image:loc>
+      <image:title>Testimonio Sofi</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://electricshadows.website/sound/images/luciana.avif</image:loc>
+      <image:title>Testimonio Luciana</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://electricshadows.website/sound/images/nicolle.avif</image:loc>
+      <image:title>Testimonio Nicolle</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://electricshadows.website/sound/images/juanpablo.avif</image:loc>
+      <image:title>Testimonio Juan Pablo</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://electricshadows.website/sound/images/carlos.avif</image:loc>
+      <image:title>Testimonio Carlos</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://electricshadows.website/sound/images/nequi.avif</image:loc>
+      <image:title>Nequi Pago</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://electricshadows.website/sound/images/paypal.avif</image:loc>
+      <image:title>PayPal Pago</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://electricshadows.website/sound/images/mercadopago.avif</image:loc>
+      <image:title>MercadoPago</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://electricshadows.website/sound/images/nubank.avif</image:loc>
+      <image:title>Nubank Pago</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://electricshadows.website/sound/images/daviplata.avif</image:loc>
+      <image:title>Daviplata Pago</image:title>
+    </image:image>
+  </url>
+
+  <!-- ===== BIOREST ===== -->
+  <url>
+    <loc>https://electricshadows.website/biorest/</loc>
+    <lastmod>2026-05-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://electricshadows.website/biorest/images/g185r.png</image:loc>
+      <image:title>Bio-Rest Logo</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://electricshadows.website/biorest/images/size.avif</image:loc>
+      <image:title>Dimensiones Almohada</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://electricshadows.website/biorest/images/book.avif</image:loc>
+      <image:title>Bio-Rest Book</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://electricshadows.website/biorest/images/Gemini_Generated_Image_n7didon7didon7di.avif</image:loc>
+      <image:title>Almohada Synaptic Sleep 1</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://electricshadows.website/biorest/images/Gemini_Generated_Image_jgynq8jgynq8jgyn.avif</image:loc>
+      <image:title>Almohada Synaptic Sleep 2</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://electricshadows.website/biorest/images/Gemini_Generated_Image_2v5hee2v5hee2v5h.avif</image:loc>
+      <image:title>Almohada Synaptic Sleep 3</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://electricshadows.website/biorest/images/Gemini_Generated_Image_886r5v886r5v886r.avif</image:loc>
+      <image:title>Almohada Synaptic Sleep 4</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://electricshadows.website/biorest/images/fa6ee3bb-c1c2-47a5-8b2c-d4ce99f3eae8.avif</image:loc>
+      <image:title>Almohada Synaptic Sleep 5</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://electricshadows.website/biorest/images/564certe54tc365c35.avif</image:loc>
+      <image:title>Almohada Material</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://electricshadows.website/biorest/images/5dd68603-8826-4001-92c6-7b063678f5bf.avif</image:loc>
+      <image:title>Almohada Detalle</image:title>
+    </image:image>
+  </url>
+
+  <!-- ===== BIOREST BLOG ===== -->
+  <url>
+    <loc>https://electricshadows.website/biorest/blog/blog.html</loc>
+    <lastmod>2026-04-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://electricshadows.website/biorest/blog/2026/04/el-vinculo-invisible.html</loc>
+    <lastmod>2026-04-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://electricshadows.website/biorest/images/Gemini_Generated_Image_n7didon7didon7di.avif</image:loc>
+      <image:title>El Vínculo Invisible</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://electricshadows.website/biorest/blog/2026/04/fase-3-expansion-global.html</loc>
+    <lastmod>2026-04-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://electricshadows.website/biorest/images/Gemini_Generated_Image_jgynq8jgynq8jgyn.avif</image:loc>
+      <image:title>Fase 3 Expansión Global</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://electricshadows.website/biorest/blog/2026/04/ciclos-circadianos-y-luz-azul.html</loc>
+    <lastmod>2026-04-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://electricshadows.website/biorest/images/Gemini_Generated_Image_2v5hee2v5hee2v5h.avif</image:loc>
+      <image:title>Ciclos Circadianos y Luz Azul</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://electricshadows.website/biorest/blog/2026/04/la-arquitectura-de-las-5-zonas.html</loc>
+    <lastmod>2026-04-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://electricshadows.website/biorest/images/Gemini_Generated_Image_886r5v886r5v886r.avif</image:loc>
+      <image:title>Arquitectura de las 5 Zonas</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://electricshadows.website/biorest/blog/2026/04/dormir-poco-causa-obesidad.html</loc>
+    <lastmod>2026-04-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://electricshadows.website/biorest/images/fa6ee3bb-c1c2-47a5-8b2c-d4ce99f3eae8.avif</image:loc>
+      <image:title>Dormir Poco Causa Obesidad</image:title>
+    </image:image>
+  </url>
+
+  <!-- ===== RUSO ===== -->
+  <url>
+    <loc>https://electricshadows.website/ruso/</loc>
+    <lastmod>2026-05-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://electricshadows.website/ruso/images/favicon.png</image:loc>
+      <image:title>Ruso Favicon</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://electricshadows.website/ruso/images/flag.png</image:loc>
+      <image:title>Bandera Rusa</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://electricshadows.website/ruso/images/logo.svg</image:loc>
+      <image:title>Ruso Logo</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://electricshadows.website/ruso/images/c1.webp</image:loc>
+      <image:title>Curso de Ruso 1</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://electricshadows.website/ruso/images/c2.webp</image:loc>
+      <image:title>Curso de Ruso 2</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://electricshadows.website/ruso/images/c3.webp</image:loc>
+      <image:title>Curso de Ruso 3</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://electricshadows.website/ruso/images/c4.webp</image:loc>
+      <image:title>Curso de Ruso 4</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://electricshadows.website/ruso/images/c2b.webp</image:loc>
+      <image:title>Curso de Ruso Banner</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://electricshadows.website/ruso/images/marcas.webp</image:loc>
+      <image:title>Marcas de Confianza</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://electricshadows.website/ruso/images/carrousel-01.avif</image:loc>
+      <image:title>Carrusel Ruso 1</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://electricshadows.website/ruso/images/carrousel-02.avif</image:loc>
+      <image:title>Carrusel Ruso 2</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://electricshadows.website/ruso/images/carrousel-03.avif</image:loc>
+      <image:title>Carrusel Ruso 3</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://electricshadows.website/ruso/images/carrousel-04.avif</image:loc>
+      <image:title>Carrusel Ruso 4</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://electricshadows.website/ruso/images/carrousel-05.avif</image:loc>
+      <image:title>Carrusel Ruso 5</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://electricshadows.website/ruso/images/carrousel-06.avif</image:loc>
+      <image:title>Carrusel Ruso 6</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://electricshadows.website/ruso/images/carrousel-07.avif</image:loc>
+      <image:title>Carrusel Ruso 7</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://electricshadows.website/ruso/images/carrousel-08.avif</image:loc>
+      <image:title>Carrusel Ruso 8</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://electricshadows.website/ruso/images/course-imac.avif</image:loc>
+      <image:title>Curso en iMac</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://electricshadows.website/ruso/images/telegramGroup.avif</image:loc>
+      <image:title>Grupo de Telegram</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://electricshadows.website/ruso/images/course-telegram.avif</image:loc>
+      <image:title>Curso Telegram</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://electricshadows.website/ruso/images/course-speakers.avif</image:loc>
+      <image:title>Curso Audio</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://electricshadows.website/ruso/images/course-book.avif</image:loc>
+      <image:title>Libro de Ruso</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://electricshadows.website/ruso/images/a620cb36-693d-4b85-8057-0f1e3c37a4e0.avif</image:loc>
+      <image:title>Material de Estudio</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://electricshadows.website/ruso/images/21852ace-9e42-4ac3-9192-85a54c3b1bd8.avif</image:loc>
+      <image:title>Garantía</image:title>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://electricshadows.website/ruso/ruso-purchase.html</loc>
+    <lastmod>2026-04-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://electricshadows.website/ruso/images/favicon.png</image:loc>
+      <image:title>Ruso Favicon</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://electricshadows.website/ruso/images/logo.svg</image:loc>
+      <image:title>Ruso Logo</image:title>
+    </image:image>
+  </url>
+
+  <!-- ===== MADEROTERAPIA ===== -->
+  <url>
+    <loc>https://electricshadows.website/maderoterapia/</loc>
+    <lastmod>2026-05-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://electricshadows.website/maderoterapia/images/favicon.png</image:loc>
+      <image:title>Maderoterapia Favicon</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://electricshadows.website/maderoterapia/images/logo.svg</image:loc>
+      <image:title>Maderoterapia Logo</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://electricshadows.website/maderoterapia/images/c1.webp</image:loc>
+      <image:title>Curso Maderoterapia 1</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://electricshadows.website/maderoterapia/images/c3.webp</image:loc>
+      <image:title>Curso Maderoterapia 3</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://electricshadows.website/maderoterapia/images/c4.webp</image:loc>
+      <image:title>Curso Maderoterapia 4</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://electricshadows.website/maderoterapia/images/c2b.webp</image:loc>
+      <image:title>Curso Maderoterapia Banner</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://electricshadows.website/maderoterapia/images/marcas.webp</image:loc>
+      <image:title>Marcas de Confianza</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://electricshadows.website/maderoterapia/images/carrousel-01.avif</image:loc>
+      <image:title>Carrusel Madera 1</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://electricshadows.website/maderoterapia/images/carrousel-02.avif</image:loc>
+      <image:title>Carrusel Madera 2</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://electricshadows.website/maderoterapia/images/carrousel-03.avif</image:loc>
+      <image:title>Carrusel Madera 3</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://electricshadows.website/maderoterapia/images/carrousel-04.avif</image:loc>
+      <image:title>Carrusel Madera 4</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://electricshadows.website/maderoterapia/images/carrousel-05.avif</image:loc>
+      <image:title>Carrusel Madera 5</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://electricshadows.website/maderoterapia/images/carrousel-06.avif</image:loc>
+      <image:title>Carrusel Madera 6</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://electricshadows.website/maderoterapia/images/carrousel-07.avif</image:loc>
+      <image:title>Carrusel Madera 7</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://electricshadows.website/maderoterapia/images/carrousel-08.avif</image:loc>
+      <image:title>Carrusel Madera 8</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://electricshadows.website/maderoterapia/images/course-imac.avif</image:loc>
+      <image:title>Curso en iMac</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://electricshadows.website/maderoterapia/images/telegramGroup.avif</image:loc>
+      <image:title>Grupo de Telegram</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://electricshadows.website/maderoterapia/images/course-telegram.avif</image:loc>
+      <image:title>Curso Telegram</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://electricshadows.website/maderoterapia/images/course-speakers.avif</image:loc>
+      <image:title>Curso Audio</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://electricshadows.website/maderoterapia/images/course-book.avif</image:loc>
+      <image:title>Manual Maderoterapia</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://electricshadows.website/maderoterapia/images/a620cb36-693d-4b85-8057-0f1e3c37a4e0.avif</image:loc>
+      <image:title>Material de Estudio</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://electricshadows.website/maderoterapia/images/21852ace-9e42-4ac3-9192-85a54c3b1bd8.avif</image:loc>
+      <image:title>Garantía</image:title>
+    </image:image>
+  </url>
+
+  <!-- ===== CURSO DE COMPOSICIÓN PARA FOTOGRAFÍA ===== -->
+  <url>
+    <loc>https://electricshadows.website/curso-de-composicion-para-fotografia/</loc>
+    <lastmod>2026-05-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://electricshadows.website/curso-de-composicion-para-fotografia/images/favicon.png</image:loc>
+      <image:title>Curso Fotografía Favicon</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://electricshadows.website/curso-de-composicion-para-fotografia/images/logo.svg</image:loc>
+      <image:title>Curso Fotografía Logo</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://electricshadows.website/curso-de-composicion-para-fotografia/images/c1.webp</image:loc>
+      <image:title>Curso Fotografía 1</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://electricshadows.website/curso-de-composicion-para-fotografia/images/c3.webp</image:loc>
+      <image:title>Curso Fotografía 3</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://electricshadows.website/curso-de-composicion-para-fotografia/images/c4.webp</image:loc>
+      <image:title>Curso Fotografía 4</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://electricshadows.website/curso-de-composicion-para-fotografia/images/marcas.webp</image:loc>
+      <image:title>Marcas de Confianza</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://electricshadows.website/curso-de-composicion-para-fotografia/images/fotocomposicio1.webp</image:loc>
+      <image:title>Foto Composición 1</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://electricshadows.website/curso-de-composicion-para-fotografia/images/fotocomposicio2.webp</image:loc>
+      <image:title>Foto Composición 2</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://electricshadows.website/curso-de-composicion-para-fotografia/images/fotocomposicio3.webp</image:loc>
+      <image:title>Foto Composición 3</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://electricshadows.website/curso-de-composicion-para-fotografia/images/558e61f9-5445-4e45-8a64-c7d8a625e7b0.avif</image:loc>
+      <image:title>Fotografía Muestra 1</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://electricshadows.website/curso-de-composicion-para-fotografia/images/da89eabf-c623-43d4-aecc-b93088cf66f2.avif</image:loc>
+      <image:title>Fotografía Muestra 2</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://electricshadows.website/curso-de-composicion-para-fotografia/images/334ffc16-29a2-4703-9705-ade681f90e1e.avif</image:loc>
+      <image:title>Fotografía Muestra 3</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://electricshadows.website/curso-de-composicion-para-fotografia/images/49b4d10c-1280-473f-85b5-6ec144efff96.avif</image:loc>
+      <image:title>Fotografía Muestra 4</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://electricshadows.website/curso-de-composicion-para-fotografia/images/587565ce-d056-4d6a-aa8a-7a67dcd7932c.avif</image:loc>
+      <image:title>Fotografía Muestra 5</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://electricshadows.website/curso-de-composicion-para-fotografia/images/5ba5d51a-c46a-4a83-849a-8585ef70b211.avif</image:loc>
+      <image:title>Fotografía Muestra 6</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://electricshadows.website/curso-de-composicion-para-fotografia/images/f7a799a1-ad3e-4395-ac98-8f420f8f0cde.avif</image:loc>
+      <image:title>Fotografía Muestra 7</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://electricshadows.website/curso-de-composicion-para-fotografia/images/a620cb36-693d-4b85-8057-0f1e3c37a4e0.avif</image:loc>
+      <image:title>Material de Estudio</image:title>
+    </image:image>
+  </url>
+
+</urlset>
