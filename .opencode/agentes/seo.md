@@ -530,3 +530,76 @@ Three equivalent placement methods: HTML `<link>` in `<head>`, HTTP `Link` heade
 -   **schema-markup**: For implementing structured data
 -   **page-cro**: For optimizing pages for conversion (not just ranking)
 -   **analytics-tracking**: For measuring SEO performance
+
+
+
+
+
+
+# AI Agent Manual: Image Alt Text Optimization for SEO
+
+This manual provides structural guidelines for an AI agent to generate and manage Alternative Text (Alt Text) for images, ensuring high accessibility and search engine performance.
+
+---
+
+## 1. Core Concept and Importance
+The **Alt Text** is a critical component of On-Page SEO. Search engine crawlers (bots) can interpret text efficiently but struggle to "see" or understand the visual content of an image without descriptive metadata.
+
+### 1.1 Technical Functions
+* **Accessibility:** Screen readers use this text to describe images to visually impaired users.
+* **Fail-safe Display:** If an image fails to load due to slow connectivity, the Alt Text appears in its place.
+* **SEO Relevance:** Helps Google understand the image's context and its relationship to the webpage content.
+
+---
+
+## 2. Rules for Generating High-Quality Alt Text
+
+The AI agent must follow these specific directives when creating descriptions:
+
+1.  **Describe Purpose and Content:**
+    * Provide a short, descriptive piece explaining the relationship between the image and the text.
+    * Explain what the image is and its significance within the specific context.
+
+2.  **Be Clear and Concise:**
+    * Avoid long paragraphs.
+    * Maintain directness and fidelity to what is visually represented.
+
+3.  **Natural Keyword Integration:**
+    * Include the target keyword *only* if it is relevant and fits naturally.
+    * **Prohibition:** Avoid "Keyword Stuffing." Never force unnecessary keywords, as this is a "black hat SEO" practice that penalizes rankings.
+
+---
+
+## 3. Handling Decorative Images
+
+Not every image requires a descriptive Alt Text. The agent should identify visual elements that do not add informational value.
+
+* **Criteria:** Borders, generic icons, or background textures.
+* **Action:** * Leave the attribute empty (`alt=""`).
+    * Mark as "none" or "na" (not applicable).
+* **Benefit:** This signals to crawlers that they should not waste resources analyzing the asset.
+
+---
+
+## 4. Implementation Examples
+
+The following table demonstrates the transition from poor practices to optimized SEO descriptions:
+
+| Category | Poor Example (Avoid) | Optimized Example (Standard) |
+| :--- | :--- | :--- |
+| **Beauty Product** | `alt="image1"` or `alt="facial cleanser best price buy now cheap"` | `alt="Bottle of foaming facial cleanser for oily skin with salicylic acid"` |
+| **Food Blog** | `alt="food"` | `alt="Fresh fruit tart with strawberries and blueberries on a wooden table"` |
+| **Data Graphics** | `alt="graph"` | `alt="Bar chart showing 20% organic traffic growth during 2026"` |
+
+---
+
+## 5. Summary Checklist for AI Agents
+
+- [ ] Is the description under 125 characters? (Recommended for most screen readers).
+- [ ] Does it avoid phrases like "Image of..." or "Picture of..."?
+- [ ] Is the keyword used naturally?
+- [ ] Is it a decorative element? If so, is the attribute empty?
+- [ ] Does it accurately reflect the visual information?
+
+---
+*End of Manual*
