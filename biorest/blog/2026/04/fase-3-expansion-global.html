@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html class="dark" lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <link rel="icon" type="image/png" href="../../../images/g185r.png" />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Manrope:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "hsla(178, 98%, 55%, 1)",
+                        "secondary": "hsla(348, 98%, 59%, 1)",
+                        "tertiary": "hsla(347, 100%, 75%, 1)",
+                        "background": "hsla(240, 4%, 6%, 1)",
+                        "surface": "hsla(240, 5%, 8%, 1)",
+                        "surface-bright": "hsla(240, 2%, 17%, 1)",
+                        "on-surface": "hsla(0, 0%, 100%, 1)",
+                        "on-surface-variant": "hsla(340, 2%, 67%, 1)",
+                    },
+                    fontFamily: {
+                        "headline": ["Space Grotesk", "sans-serif"],
+                        "body": ["Manrope", "sans-serif"],
+                    },
+                    borderRadius: { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" },
+                },
+            },
+        }
+    </script>
+    <link rel="stylesheet" href="../../../styles/style.css">
+</head>
+
+<body class="bg-background text-on-surface font-body selection:bg-primary selection:text-black">
+    <div class="fixed inset-0 grid-overlay z-0 opacity-20 pointer-events-none"></div>
+    <div class="fixed inset-0 scanlines z-50 opacity-[0.03] pointer-events-none"></div>
+
+    <nav class="fixed top-0 w-full z-[60] bg-surface/40 dark:bg-[#0e0e0f]/60 backdrop-blur-xl flex justify-between items-center px-8 h-20 shadow-[0_8px_32px_0_rgba(143,245,255,0.06)]">
+        <div class="flex items-center gap-4">
+            <img alt="Logo" class="h-10 w-10 object-contain" src="../../../images/g185r.png" />
+            <span class="text-xl font-bold tracking-tighter text-[#8ff5ff] font-headline uppercase">BIO-REST BLOG</span>
+        </div>
+        <div class="hidden md:flex items-center gap-8 font-['Space_Grotesk'] tracking-tight text-sm uppercase">
+            <a class="text-white/70 hover:text-[#8ff5ff] transition-colors" href="../../../code.html">Home</a>
+            <a class="text-white/70 hover:text-[#8ff5ff] transition-colors" href="../../blog.html">Blog</a>
+            <a class="text-[#8ff5ff] border-b-2 border-[#8ff5ff] pb-1" href="#">Protocolo #108</a>
+        </div>
+    </nav>
+
+    <main class="relative z-10 pt-40 pb-20 max-w-4xl mx-auto px-8">
+        <article>
+            <header class="mb-12">
+                <span class="text-tertiary font-headline tracking-[0.3em] uppercase mb-4 block">Comunicado Oficial #108</span>
+                <h1 class="text-5xl md:text-7xl font-headline font-bold tracking-tighter uppercase mb-8 leading-none">
+                    Fase 3: <span class="text-tertiary glow-pink">Expansión Global</span>
+                </h1>
+                <div class="flex items-center gap-6 text-xs uppercase tracking-widest text-on-surface-variant border-y border-outline-variant/10 py-6">
+                    <span>Publicado: 05 Abr 2026</span>
+                    <span>Lectura: 4 min</span>
+                    <span class="text-tertiary">News Division</span>
+                </div>
+            </header>
+
+            <img src="../../../images/Gemini_Generated_Image_jgynq8jgynq8jgyn.avif" alt="Expansión Global" class="w-full aspect-video object-cover mb-12 border border-outline-variant/20 shadow-2xl" />
+
+            <div class="prose prose-invert prose-primary max-w-none text-on-surface-variant leading-relaxed text-lg space-y-8">
+                <div class="glass-panel p-8 border-l-4 border-tertiary my-8">
+                    <p class="text-lg">
+                        Después de dos años de desarrollo intensivo en mercados selectos, la infraestructura necesaria para la expansión global ha alcanzado los umbrales de operación requeridos. Este comunicado establece los parámetros de nuestro plan de crecimiento internacional.
+                    </p>
+                </div>
+
+                <h2 class="text-3xl font-headline font-bold text-white uppercase tracking-tight">Evolución del modelo de distribución</h2>
+                <p>
+                    La Fase 1 se centró en el desarrollo del producto mínimo viable con validación en el mercado local. La Fase 2 estableció centros de experiencia en ciudades clave de Europa, con tasas de satisfacción del cliente superiores al 94%. Ahora, la Fase 3 introduce la red de distribución automatizada que permite escalar sin comprometer la calidad del servicio postventa.
+                </p>
+                <p>
+                    El modelo híbrido de fulfillment combina almacenes regionales en hubs logísticos estratégicos con last-mile delivery mediante socios especializados en productos de alto valor. Este enfoque reduce los tiempos de entrega a menos de 48 horas en el 87% de las ubicaciones cubiertas.
+                </p>
+
+                <h2 class="text-3xl font-headline font-bold text-white uppercase tracking-tight">Latinoamérica: nuevos nodos activos</h2>
+                <p>
+                    La región LATAM representa una oportunidad estratégica debido a la creciente clase media con acceso a tecnología de bienestar premium. Los siguientes países están ahora soportados en nuestra plataforma:
+                </p>
+
+                <div class="glass-panel p-8 border-l-4 border-tertiary my-8">
+                    <ul class="list-disc list-inside space-y-4 text-sm">
+                        <li><strong class="text-white">México:</strong> Centros de distribución en Ciudad de México y Guadalajara. Servicio disponible desde el 5 de abril.</li>
+                        <li><strong class="text-white">Colombia:</strong> Hub principal en Bogotá con cobertura nacional. Activación programada para el 12 de abril.</li>
+                        <li><strong class="text-white">Argentina:</strong> Distribución en Buenos Aires y Rosario. Servicio disponible desde el 8 de abril.</li>
+                        <li><strong class="text-white">Chile:</strong> Nodo en Santiago con alcance a regiones metropolitanas. Disponible desde el 10 de abril.</li>
+                    </ul>
+                </div>
+
+                <h2 class="text-3xl font-headline font-bold text-white uppercase tracking-tight">Infraestructura tecnológica</h2>
+                <p>
+                    La expansión no sería posible sin la plataforma tecnológica que sustenta cada aspecto de la operación. Nuestro stack incluye:
+                </p>
+
+                <ol class="list-decimal list-inside space-y-2">
+                    <li><strong class="text-white">Sistema de gestión de inventario:</strong> Predicción de demanda mediante ML con precisión del 91%.</li>
+                    <li><strong class="text-white">Plataforma de experiencia del cliente:</strong> Onboarding personalizado, seguimiento en tiempo real y soporte 24/7.</li>
+                    <li><strong class="text-white">Logística inversa:</strong> Proceso optimizado para devoluciones y reciclaje de materiales.</li>
+                    <li><strong class="text-white">Analítica de salud del sueño:</strong> Integración con dispositivos wearables para optimización continua.</li>
+                </ol>
+
+                <h2 class="text-3xl font-headline font-bold text-white uppercase tracking-tight">Compromiso con la calidad</h2>
+                <p>
+                    A medida que escalamos, mantenemos los estándares que nos han diferenciado. Cada unidad enviada pasa por un protocolo de control de calidad de 47 puntos. La garantía extendida de 10 años sigue siendo estándar en todos los mercados.
+                </p>
+                <p>
+                    Además, estamos implementando programas de capacitación local para equipos de servicio técnico en cada región, asegurando que la experiencia postventa sea consistente independientemente de la ubicación geográfica.
+                </p>
+
+                <h2 class="text-3xl font-headline font-bold text-white uppercase tracking-tight">Siguientes pasos</h2>
+                <p>
+                    La Fase 3 representa solo el comienzo de una estrategia de crecimiento que se expandirá a Asia-Pacífico en 2027. Los equipos de desarrollo ya están trabajando en la adaptación de productos para mercados con preferencias de descanso diferenciadas.
+                </p>
+                <p>
+                    El descanso ya no es una opción regional. Bio-Rest está construyendo la infraestructura global para que cada persona, independientemente de su ubicación, tenga acceso a tecnología de descanso científicamente optimizado.
+                </p>
+
+                <p class="mt-12 text-tertiary font-bold uppercase tracking-widest">
+                    Dormir bien es un derecho, no un lujo.
+                </p>
+            </div>
+        </article>
+    </main>
+
+    <footer class="bg-black w-full py-16 px-8 border-t border-outline-variant/15 mt-20">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <span class="text-[#ff7439] font-black font-headline uppercase tracking-tighter">Bio-Rest Division</span>
+            <a href="../../blog.html" class="text-primary font-headline text-xs uppercase tracking-widest hover:underline">Volver al archivo</a>
+        </div>
+    </footer>
+</body>
+</html>

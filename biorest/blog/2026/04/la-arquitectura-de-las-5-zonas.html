@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html class="dark" lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <link rel="icon" type="image/png" href="../../../images/g185r.png" />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Manrope:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "hsla(178, 98%, 55%, 1)",
+                        "secondary": "hsla(348, 98%, 59%, 1)",
+                        "tertiary": "hsla(347, 100%, 75%, 1)",
+                        "background": "hsla(240, 4%, 6%, 1)",
+                        "surface": "hsla(240, 5%, 8%, 1)",
+                        "surface-bright": "hsla(240, 2%, 17%, 1)",
+                        "on-surface": "hsla(0, 0%, 100%, 1)",
+                        "on-surface-variant": "hsla(340, 2%, 67%, 1)",
+                    },
+                    fontFamily: {
+                        "headline": ["Space Grotesk", "sans-serif"],
+                        "body": ["Manrope", "sans-serif"],
+                    },
+                    borderRadius: { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" },
+                },
+            },
+        }
+    </script>
+    <link rel="stylesheet" href="../../../styles/style.css">
+</head>
+
+<body class="bg-background text-on-surface font-body selection:bg-primary selection:text-black">
+    <div class="fixed inset-0 grid-overlay z-0 opacity-20 pointer-events-none"></div>
+    <div class="fixed inset-0 scanlines z-50 opacity-[0.03] pointer-events-none"></div>
+
+    <nav class="fixed top-0 w-full z-[60] bg-surface/40 dark:bg-[#0e0e0f]/60 backdrop-blur-xl flex justify-between items-center px-8 h-20 shadow-[0_8px_32px_0_rgba(143,245,255,0.06)]">
+        <div class="flex items-center gap-4">
+            <img alt="Logo" class="h-10 w-10 object-contain" src="../../../images/g185r.png" />
+            <span class="text-xl font-bold tracking-tighter text-[#8ff5ff] font-headline uppercase">BIO-REST BLOG</span>
+        </div>
+        <div class="hidden md:flex items-center gap-8 font-['Space_Grotesk'] tracking-tight text-sm uppercase">
+            <a class="text-white/70 hover:text-[#8ff5ff] transition-colors" href="../../../code.html">Home</a>
+            <a class="text-white/70 hover:text-[#8ff5ff] transition-colors" href="../../blog.html">Blog</a>
+            <a class="text-[#8ff5ff] border-b-2 border-[#8ff5ff] pb-1" href="#">Protocolo #001</a>
+        </div>
+    </nav>
+
+    <main class="relative z-10 pt-40 pb-20 max-w-4xl mx-auto px-8">
+        <article>
+            <header class="mb-12">
+                <span class="text-primary font-headline tracking-[0.3em] uppercase mb-4 block">Protocolo de Investigación #001</span>
+                <h1 class="text-5xl md:text-7xl font-headline font-bold tracking-tighter uppercase mb-8 leading-none">
+                    La arquitectura de las <span class="text-primary glow-cyan">5 zonas</span>
+                </h1>
+                <div class="flex items-center gap-6 text-xs uppercase tracking-widest text-on-surface-variant border-y border-outline-variant/10 py-6">
+                    <span>Publicado: 10 Abr 2026</span>
+                    <span>Lectura: 6 min</span>
+                    <span class="text-primary">Tech Division</span>
+                </div>
+            </header>
+
+            <img src="../../../images/Gemini_Generated_Image_886r5v886r5v886r.avif" alt="Arquitectura 5 Zonas" class="w-full aspect-video object-cover mb-12 border border-outline-variant/20 shadow-2xl" />
+
+            <div class="prose prose-invert prose-primary max-w-none text-on-surface-variant leading-relaxed text-lg space-y-8">
+                <div class="glass-panel p-8 border-l-4 border-primary my-8">
+                    <p class="text-lg">
+                        La geometría de la espuma de alta densidad y su distribución en zonas diferenciadas constituye la base fundamental para lograr una descompresión cervical instantánea y un soporte lumbar adaptativo.
+                    </p>
+                </div>
+
+                <h2 class="text-3xl font-headline font-bold text-white uppercase tracking-tight">El problema del colchón tradicional</h2>
+                <p>
+                    Los colchones convencionales tratan la columna vertebral como una línea plana, ignorando las curvaturas naturales del cuerpo humano. Esto genera puntos de presión excesiva en hombros y caderas, mientras la zona lumbar queda sin soporte adecuado. El resultado: cambios de posición constantes durante la noche, microdespertares y una recuperación muscular incompleta.
+                </p>
+
+                <h2 class="text-3xl font-headline font-bold text-white uppercase tracking-tight">Las 5 zonas de soporte</h2>
+                <p>
+                    Nuestra arquitectura de cinco zonas ha sido desarrollada mediante análisis biomecánico computarizado y validación con sensores de presión corporal. Cada zona responde a las demandas específicas de cada segmento corporal:
+                </p>
+
+                <div class="glass-panel p-8 border-l-4 border-primary my-8">
+                    <ol class="list-decimal list-inside space-y-4 text-sm">
+                        <li><strong class="text-white">Zona cervical (cabeza):</strong> Espuma de densidad media-baja con tecnología de memoria viscoelástica para adaptación craneal.</li>
+                        <li><strong class="text-white">Zona escapular (hombros):</strong> Cámaras de aire integradas que permiten hundimiento controlado sin comprometer el soporte lateral.</li>
+                        <li><strong class="text-white">Zona lumbar (zona media-baja):</strong> Núcleo de alta densidad con soporte progresivo que mantiene la curvatura natural de la columna.</li>
+                        <li><strong class="text-white">Zona sacra (pelvis):</strong> Estructura de celdas abiertas que redistribuye el peso de las crestas ilíacas.</li>
+                        <li><strong class="text-white">Zona tibial (piernas):</strong> Perfil decreciente que eleva las extremidades inferiores para optimizar la circulación venosa.</li>
+                    </ol>
+                </div>
+
+                <h2 class="text-3xl font-headline font-bold text-white uppercase tracking-tight">Tecnología de descompresión</h2>
+                <p>
+                    El concepto de descompresión cervical instantánea se basa en la reducción de la carga axial sobre los discos intervertebrales durante el sueño. Cuando la cabeza se hunde suavemente en la zona cervical especializada, se reduce la compresión de las vértebras C1-C7, permitiendo que el líquido intervertebral se regenere durante las fases de sueño profundo.
+                </p>
+                <p>
+                    Los estudios de resonancia magnética muestran que con nuestra tecnología, la altura del disco intervertebral lumbar aumenta un 8.3% después de 4 horas de descanso comparado con colchones convencionales.
+                </p>
+
+                <h2 class="text-3xl font-headline font-bold text-white uppercase tracking-tight">Materiales de siguiente generación</h2>
+                <p>
+                    Empleamos una espuma de poliuretano de celdas abiertas con estructura de panal que combina:
+                </p>
+
+                <ul class="list-disc list-inside space-y-2">
+                    <li><strong class="text-white">Resilience superior al 85%:</strong> Recuperación instantánea de la forma después de la compresión.</li>
+                    <li><strong class="text-white">Conductividad térmica reducida:</strong> Disipación del calor corporal hacia las capas inferiores.</li>
+                    <li><strong class="text-white">Durabilidad certificada:</strong> Prueba de compresión del 40% durante 30,000 ciclos sin deformación permanente.</li>
+                </ul>
+
+                <p>
+                    La ciencia detrás del descanso óptimo no es un lujo, es una necesidad biológica. Nuestra arquitectura de cinco zonas representa la síntesis entre ingeniería de materiales y biomecánica humana, creando las condiciones para una recuperación neural y muscular verdaderamente restauradora.
+                </p>
+            </div>
+        </article>
+    </main>
+
+    <footer class="bg-black w-full py-16 px-8 border-t border-outline-variant/15 mt-20">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <span class="text-[#ff7439] font-black font-headline uppercase tracking-tighter">Bio-Rest Division</span>
+            <a href="../../blog.html" class="text-primary font-headline text-xs uppercase tracking-widest hover:underline">Volver al archivo</a>
+        </div>
+    </footer>
+</body>
+</html>

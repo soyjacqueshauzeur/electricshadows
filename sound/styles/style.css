@@ -1,0 +1,423 @@
+:root {
+    --color-gray-text: hsl(0, 0%, 20%);
+    --color-text: hsl(0, 0%, 20%);
+    --color-red-support: hsla(0, 100%, 56%, 1);
+    --color-gradient-pink: hsla(348, 98%, 59%, 0.15);
+    --color-gradient-cyan: hsla(178, 98%, 55%, 0.15);
+    --color-highlight-bg: hsla(270, 80%, 55%, 1);
+    --color-white: hsla(0, 0%, 100%, 1);
+    --color-orange: hsla(25, 95%, 56%, 1);
+    --gradient-orange-purple: linear-gradient(to right, hsla(25, 95%, 56%, 1), hsla(270, 80%, 55%, 1));
+}
+
+body {
+    min-height: 100vh !important;
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+main {
+    flex: 1 0 auto !important;
+}
+
+.pagos {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 40px;
+    margin-top: 30px;
+    margin-bottom: 50px;
+}
+
+#como-funciona.como-funciona {
+    background: hsla(25, 94%, 87%, 0.5) !important;
+}
+
+@media (min-width: 1024px) {
+    .pagos {
+        gap: 85px;
+    }
+}
+
+.pagos-img {
+    width: 100px;
+}
+
+.pagos-text {
+    font-size: 14px;
+    color: var(--color-highlight-bg);
+    margin-top: 8px;
+}
+
+.pagos-link {
+    display: block;
+    margin-top: 8px;
+    font-size: 14px;
+    color: var(--color-highlight-bg);
+}
+
+.modal-support-text {
+    color: var(--color-red-support);
+    margin-top: 1em;
+}
+
+.hero-image-wrapper {
+    width: 35em;
+    max-width: 100%;
+}
+
+.gradient-background {
+    background: radial-gradient(circle at 30% 70%, var(--color-gradient-pink) 0%, transparent 50%), radial-gradient(circle at 70% 30%, var(--color-gradient-cyan) 0%, transparent 50%);
+}
+
+.text-center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.highlight {
+    background-color: var(--color-highlight-bg);
+    color: var(--color-white);
+    padding: 5px;
+}
+
+/* https://remixicon.com/ */
+i[class*="ri-"] {
+    font-size: 1.5em;
+}
+
+.redes {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.redes>.flex {
+    flex-wrap: wrap;
+}
+
+/* ¿Cómo funciona? – Pasos 1-2-3 */
+.pasos-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+}
+
+@media (min-width: 768px) {
+    .pasos-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.paso-card {
+    position: relative;
+    overflow: hidden;
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem;
+    border-radius: 1.25rem;
+    /* border: 1px solid rgba(255, 140, 66, 0.12); */
+    background: rgba(255, 255, 255, 0.85);
+    transition: all 0.3s ease;
+}
+
+.paso-card:hover {
+    border-color: rgba(255, 140, 66, 0.35);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 40px rgba(255, 140, 66, 0.06);
+}
+
+.dark .paso-card {
+    background: hsla(240, 5%, 8%, 0.6);
+    border-color: rgba(255, 140, 66, 0.08);
+}
+
+.dark .paso-desc {
+    color: var(--color-white);
+}
+
+.paso-numero {
+    position: absolute;
+    top: 5%;
+    left: -50px;
+    width: 100%;
+    height: 90%;
+    display: flex;
+    align-items: center;
+    /* justify-content: center; */
+    padding-left: 5%;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(28rem, 19vw, 16rem);
+    font-weight: 800;
+    color: hsla(25, 95%, 56%, 0.2);
+    z-index: 0;
+    line-height: 1;
+    pointer-events: none;
+    user-select: none;
+}
+
+@media (max-width: 768px) {
+    .paso-card {
+        min-height: 240px;
+    }
+    .paso-numero {
+        font-size: clamp(23rem, 35vw, 11rem);
+    }
+}
+
+.paso-icon {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    position: relative;
+    z-index: 1;
+}
+
+.paso-titulo {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 1.15rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: hsla(25, 95%, 56%, 1);
+    margin-bottom: 0.5rem;
+    position: relative;
+    z-index: 1;
+}
+
+.paso-desc {
+    font-family: 'Manrope', sans-serif;
+    font-size: 0.875rem;
+    color: var(--color-text);
+    line-height: 1.5;
+    max-width: 260px;
+    position: relative;
+    z-index: 1;
+    font-weight: 500;
+}
+
+
+mark {
+    background-color: var(--color-highlight-bg);
+    padding: 0.2em 0.3em;
+    color: var(--color-white);
+    border-radius: 0.2rem;
+}
+
+.dark #songForm input:not([type="checkbox"]),
+.dark #songForm textarea,
+.dark #songForm select {
+    background: hsl(0deg 0% 26.92%) !important;
+}
+
+.dark #songForm input:not([type="checkbox"])::placeholder,
+.dark #songForm textarea::placeholder {
+    color: white !important;
+}
+
+/* ========================================
+   Light theme overrides
+   ======================================== */
+
+body.bg-gray-50 {
+    background: linear-gradient(180deg, #ffffff 0%, #f3f3f3 100%) !important;
+}
+
+body.bg-gray-50 main {
+    background: #ffffff !important;
+}
+
+body.bg-gray-50 .bg-surface {
+    background: hsla(0, 0%, 97%, 1) !important;
+}
+
+body.bg-gray-50 .bg-surface-bright {
+    background: hsla(0, 0%, 90%, 1) !important;
+}
+
+body.bg-gray-50 .text-on-surface {
+    color: var(--color-text) !important;
+}
+
+.text-on-surface-variant {
+    color: hsl(0, 0%, 50%);
+}
+
+body.bg-gray-50 .text-on-surface-variant {
+    color: hsl(0, 0%, 50%) !important;
+    font-weight: bold;
+}
+
+body.bg-gray-50 .text-white {
+    color: #ffffff !important;
+}
+
+body.bg-gray-50 .text-black {
+    color: #ffffff !important;
+}
+
+body.bg-gray-50 .text-white\/70 {
+    color: var(--color-text) !important;
+}
+
+body.bg-gray-50 .glass-panel {
+    /* background: rgba(255, 255, 255, 0.85) !important; */
+    border-color: rgba(0, 0, 0, 0.06) !important;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04) !important;
+}
+
+body.bg-gray-50 .grid-overlay {
+    background-image: linear-gradient(to right, hsla(25, 95%, 56%, 0.06) 1px, transparent 1px), linear-gradient(to bottom, hsla(270, 80%, 55%, 0.06) 1px, transparent 1px) !important;
+}
+
+body.bg-gray-50 .scanlines {
+    display: none !important;
+}
+
+body.bg-gray-50 nav {
+    background: rgba(255, 255, 255, 0.98) !important;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.06) !important;
+}
+
+body.bg-gray-50 .hero {
+    background: #ffffff !important;
+}
+
+body.bg-gray-50 footer {
+    background: linear-gradient(180deg, #f0f0f0 0%, #e8e8e8 100%) !important;
+    border-color: rgba(0, 0, 0, 0.08) !important;
+}
+
+body.bg-gray-50 .text-\[\#ff8c42\] {
+    color: hsla(25, 95%, 55%, 1) !important;
+}
+
+body.bg-gray-50 .hover\:text-\[\#ff8c42\]:hover {
+    color: hsla(25, 95%, 45%, 1) !important;
+}
+
+body.bg-gray-50 .glow-orange {
+    filter: drop-shadow(0 0 8px hsla(25, 95%, 56%, 0.3)) !important;
+}
+
+body.bg-gray-50 .glow-purple {
+    filter: drop-shadow(0 0 8px hsla(270, 80%, 55%, 0.3)) !important;
+}
+
+/* body.bg-gray-50 section {
+    background: transparent !important;
+} */
+
+body.bg-gray-50 .border {
+    border-color: rgba(0, 0, 0, 0.08) !important;
+}
+
+body.bg-gray-50 input:not([type="checkbox"]),
+body.bg-gray-50 textarea,
+body.bg-gray-50 select {
+    background: #fafafa !important;
+    border-color: rgba(0, 0, 0, 0.1) !important;
+    color: var(--color-text) !important;
+}
+
+body.bg-gray-50 button:not(.bg-gradient-to-br),
+body.bg-gray-50 .bg-surface-bright {
+    background: hsla(0, 0%, 94%, 1) !important;
+}
+
+/* ========================================
+   Dark theme overrides
+   ======================================== */
+
+.dark .bg-background {
+    background: hsla(240, 4%, 6%, 1) !important;
+}
+
+.dark .bg-surface {
+    background: hsla(240, 5%, 8%, 1) !important;
+}
+
+.dark .bg-surface-bright {
+    background: hsla(240, 2%, 17%, 1) !important;
+}
+
+.dark .text-on-surface {
+    color: hsla(0, 0%, 100%, 1) !important;
+}
+
+.dark .text-on-surface-variant {
+    color: hsl(0, 0%, 50%) !important;
+    font-weight: bold;
+}
+
+.dark .text-white {
+    color: #ffffff !important;
+}
+
+.dark .glass-panel {
+    background: rgba(32, 31, 33, 0.4) !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+    box-shadow: none !important;
+}
+
+.dark .grid-overlay {
+    background-image: linear-gradient(to right, hsla(25, 95%, 56%, 0.05) 1px, transparent 1px), linear-gradient(to bottom, hsla(270, 80%, 55%, 0.05) 1px, transparent 1px) !important;
+}
+
+.dark .scanlines {
+    display: block !important;
+    opacity: 0.03 !important;
+}
+
+.dark nav {
+    background: rgba(14, 14, 15, 0.9) !important;
+    box-shadow: 0 8px 32px rgba(255, 140, 66, 0.06) !important;
+}
+
+.dark .hero {
+    background: linear-gradient(135deg, hsla(240, 4%, 6%, 1) 0%, hsla(240, 5%, 8%, 1) 100%) !important;
+}
+
+.dark footer {
+    background: hsla(0, 0%, 0%, 1) !important;
+}
+
+.dark .text-\[\#ff8c42\] {
+    color: hsla(25, 95%, 56%, 1) !important;
+}
+
+.dark .hover\:text-\[\#ff8c42\]:hover {
+    color: hsla(25, 95%, 65%, 1) !important;
+}
+
+.dark .glow-orange {
+    filter: drop-shadow(0 0 10px hsla(25, 95%, 56%, 0.5)) !important;
+}
+
+.dark .glow-purple {
+    filter: drop-shadow(0 0 10px hsla(270, 80%, 55%, 0.5)) !important;
+}
+
+.dark section {
+    background: transparent !important;
+}
+
+.bg-surface-dark {
+    background-color: hsla(240, 5%, 8%, 1) !important;
+    position: relative;
+    bottom: 8em;
+    h2 {
+        color: hsla(25, 95%, 56%, 1);
+    }
+    p {
+        color: hsla(240, 5%, 100%, 1) !important;
+    }
+}
