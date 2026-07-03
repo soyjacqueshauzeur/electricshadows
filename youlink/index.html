@@ -494,6 +494,29 @@
             throw new Error("Channel data not found.");
         }
 
+        function formatChannelHeader(channelData) {
+            const snip = channelData.snippet;
+            const stats = channelData.statistics;
+            const channelId = channelData.id;
+
+            currentChannelName = (snip.customUrl || snip.title).replace(/^@/, '').replace(/[^a-zA-Z0-9_.-]/g, '_');
+
+            const dateObj = new Date(snip.publishedAt);
+            const dateStr = dateObj.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+            const numFmt = new Intl.NumberFormat('en-US');
+
+            let info = `${snip.title} | ${snip.customUrl || ''}\n\n`;
+            if (snip.description) info += `Description\n${snip.description}\n\n`;
+            info += `More info\nhttps://www.youtube.com/${snip.customUrl || 'channel/' + channelId}\n`;
+            if (snip.country) info += `${snip.country}\n`;
+            info += `Joined ${dateStr}\n`;
+            if (stats.subscriberCount) info += `${numFmt.format(stats.subscriberCount)} subscribers\n`;
+            if (stats.videoCount) info += `${numFmt.format(stats.videoCount)} videos\n`;
+            if (stats.viewCount) info += `${numFmt.format(stats.viewCount)} views\n`;
+            info += `\n${'-'.repeat(40)}`;
+            return info;
+        }
+
         // Function to parse ISO 8601 duration
         function formatViews(views) {
             const n = parseInt(views) || 0;
@@ -625,13 +648,15 @@
                 }
             }
 
-            const channelTitle = snip.channelTitle || 'Unknown';
-            currentChannelName = channelTitle.replace(/^@/, '').replace(/[^a-zA-Z0-9_.-]/g, '_');
-
-            let header = `${channelTitle}\n\n`;
-            header += `Title: ${snip.title}\n`;
-            header += `Video: https://www.youtube.com/watch?v=${videoId}\n`;
-            if (snip.description) header += `Description\n${snip.description}\n`;
+            let header = '';
+            try {
+                const channelData = await getChannelDetails(snip.channelId);
+                header = formatChannelHeader(channelData);
+            } catch (e) {
+                header = `${snip.channelTitle || 'Unknown'}\n\n`;
+            }
+            header += `Video: ${snip.title}\n`;
+            header += `URL: https://www.youtube.com/watch?v=${videoId}\n`;
             extractedData = [header];
 
             const itemData = {
@@ -670,8 +695,19 @@
                 } catch (e) { /* skip */ }
             }
 
-            let header = `Playlist\n\n`;
-            header += `URL: https://www.youtube.com/playlist?list=${playlistId}\n`;
+            let header = '';
+            const channelId = items.length > 0 ? items[0].snippet.channelId : null;
+            if (channelId) {
+                try {
+                    const channelData = await getChannelDetails(channelId);
+                    header = formatChannelHeader(channelData);
+                } catch (e) {
+                    header = `Playlist\n\n`;
+                }
+            } else {
+                header = `Playlist\n\n`;
+            }
+            header += `\nPlaylist URL: https://www.youtube.com/playlist?list=${playlistId}\n`;
             header += `Total: ${items.length} videos\n`;
             extractedData = [header];
 
@@ -1022,7 +1058,7 @@
         function updateResultsView() {
             const channelHeader = extractedData.find(l => l.includes('|')) || '';
             const channelLines = extractedData.slice(0, 
-                extractedData.findIndex(l => l.startsWith('===')) || extractedData.length
+                (extractedData.findIndex(l => l.startsWith('===')) + 1 || extractedData.length + 1) - 1
             ).filter(l => !l.startsWith('==='));
             
             let displayLines = [...channelLines];
@@ -1100,25 +1136,7 @@
                     const channelData = await getChannelDetails(channelId);
                     const uploadsPlaylistId = channelData.contentDetails.relatedPlaylists.uploads;
                     
-                    const snip = channelData.snippet;
-                    const stats = channelData.statistics;
-                    
-                    currentChannelName = (snip.customUrl || snip.title).replace(/^@/, '').replace(/[^a-zA-Z0-9_.-]/g, '_');
-                    
-                    const dateObj = new Date(snip.publishedAt);
-                    const dateStr = dateObj.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
-                    const numFmt = new Intl.NumberFormat('en-US');
-                    
-                    let channelInfo = `${snip.title} | ${snip.customUrl || ''}\n\n`;
-                    if (snip.description) channelInfo += `Description\n${snip.description}\n\n`;
-                    channelInfo += `More info\nhttps://www.youtube.com/${snip.customUrl || 'channel/'+channelId}\n`;
-                    if (snip.country) channelInfo += `${snip.country}\n`;
-                    channelInfo += `Joined ${dateStr}\n`;
-                    if (stats.subscriberCount) channelInfo += `${numFmt.format(stats.subscriberCount)} subscribers\n`;
-                    if (stats.videoCount) channelInfo += `${numFmt.format(stats.videoCount)} videos\n`;
-                    if (stats.viewCount) channelInfo += `${numFmt.format(stats.viewCount)} views\n`;
-                    
-                    extractedData = [channelInfo];
+                    extractedData = [formatChannelHeader(channelData)];
                     
                     setUIState("loading", "Extracting all content...");
                     const allContent = await extractAllFromPlaylist(uploadsPlaylistId);
@@ -1186,7 +1204,7 @@
             
             const channelHeader = extractedData.find(l => l.includes('|')) || '';
             const channelLines = extractedData.slice(0, 
-                extractedData.findIndex(l => l.startsWith('===')) || extractedData.length
+                (extractedData.findIndex(l => l.startsWith('===')) + 1 || extractedData.length + 1) - 1
             ).filter(l => !l.startsWith('==='));
             
             let content = [...channelLines, ''].join('\n');
@@ -1208,7 +1226,7 @@
             
             const channelHeader = extractedData.find(l => l.includes('|')) || '';
             const channelLines = extractedData.slice(0, 
-                extractedData.findIndex(l => l.startsWith('===')) || extractedData.length
+                (extractedData.findIndex(l => l.startsWith('===')) + 1 || extractedData.length + 1) - 1
             ).filter(l => !l.startsWith('==='));
             
             let content = `# ${currentChannelName}\n\n`;
@@ -1247,7 +1265,7 @@
 
             const channelHeader = extractedData.find(l => l.includes('|')) || '';
             const channelLines = extractedData.slice(0,
-                extractedData.findIndex(l => l.startsWith('===')) || extractedData.length
+                (extractedData.findIndex(l => l.startsWith('===')) + 1 || extractedData.length + 1) - 1
             ).filter(l => !l.startsWith('==='));
 
             let content = channelLines.map(l => l.replace(/\|/g, ',')).join('\n');
