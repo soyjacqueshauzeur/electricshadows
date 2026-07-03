@@ -393,13 +393,19 @@
             </div>
         </section>
 
+        <!-- Video explicativo -->
+        <section class="py-20" style="background-color: #000;">
+            <div class="w-full flex justify-center">
+                <iframe class="w-full lg:w-1/2 mx-auto aspect-video" src="https://www.youtube.com/embed/CQ8sPWYa3N4?si=ImW_O5YmTqrYg8be" title="Video explicativo Sound Division" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </section>
         <!-- Formulario -->
         <section id="crear" class="py-20">
             <div class="max-w-5xl mx-auto px-8">
                 <h2 class="text-3xl md:text-4xl font-headline font-bold tracking-tighter text-center uppercase mb-12">
                     🎶 Crea Tu Canción Ahora
                 </h2>
-                <div class="glass-panel p-8 rounded-2xl">
+                <div class="glass-panel p-8 rounded-2xl crear">
                     <form id="songForm" class="space-y-6">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div>
@@ -499,7 +505,8 @@
                     </div>
                 </div>
                 <!-- https://ipinfo.io/dashboard/lite -->
-                <!-- <script>
+                <!--
+                <script>
                     fetch('https://ipinfo.io/json')
                         .then(res => res.json())
                         .then(data => {
@@ -512,7 +519,76 @@
                             console.log('Error:', err);
                             document.querySelectorAll('.colombia').forEach(el => el.style.display = 'none');
                         });
-                </script> -->
+                </script>
+                -->
+
+                <!-- Detección combinada: idioma + zona horaria + IP -->
+                <script>
+                    (function() {
+                        const colombiaElements = document.querySelectorAll('.colombia');
+                        let score = 0;
+                        const signals = [];
+
+                        // 1. Idioma del navegador (fuerte)
+                        const lang = navigator.language || '';
+                        const langs = navigator.languages || [];
+                        if (lang === 'es-CO' || langs.some(l => l === 'es-CO')) {
+                            score += 40;
+                            signals.push('lang:es-CO +40');
+                        } else if (lang.startsWith('es') || langs.some(l => l.startsWith('es'))) {
+                            score += 20;
+                            signals.push('lang:es +20');
+                        }
+
+                        // 2. Zona horaria (muy fuerte)
+                        try {
+                            const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+                            if (tz === 'America/Bogota') {
+                                score += 40;
+                                signals.push('tz:Bogota +40');
+                            }
+                        } catch(e) {}
+
+                        // 3. Moneda (si COP está disponible)
+                        try {
+                            const fmt = new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP' });
+                            const cop = fmt.format(1);
+                            if (cop.includes('$')) {
+                                score += 10;
+                                signals.push('currency:COP +10');
+                            }
+                        } catch(e) {}
+
+                        // 4. IP (respaldo, 10 pts si es CO)
+                        fetch('https://ipinfo.io/json')
+                            .then(res => res.json())
+                            .then(data => {
+                                if (data.country === 'CO') {
+                                    score += 10;
+                                    signals.push('ip:CO +10');
+                                } else {
+                                    signals.push('ip:' + data.country + ' +0');
+                                }
+                                apply();
+                            })
+                            .catch(() => {
+                                signals.push('ip:error');
+                                apply();
+                            });
+
+                        function apply() {
+                            console.log('Detección Colombia:', signals.join(', '), '| Score:', score);
+                            if (score < 30) {
+                                colombiaElements.forEach(el => el.style.display = 'none');
+                            }
+                        }
+
+                        // Aplicar regla local antes de IP si score ya es alto
+                        if (score >= 50) {
+                            console.log('Detección Colombia (rápida):', signals.join(', '), '| Score:', score);
+                        }
+                    })();
+                </script>
 
                 <!-- Modales de métodos de pago -->
                 <div id="modal-nubank" class="modal fixed inset-0 z-[70] hidden items-center justify-center bg-black/80 backdrop-blur-sm">

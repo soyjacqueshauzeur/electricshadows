@@ -1,0 +1,1271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Youlink Link Extractor</title>
+    <link rel="icon" type="image/png" href="icon.png">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+        
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1A1A1A; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #3E3E3E; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555; 
+        }
+
+        .fade-in { animation: fadeIn 0.3s ease-in-out forwards; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        
+        .spin { animation: spin 1s linear infinite; }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+
+        .cat-tab {
+            padding: 6px 14px;
+            font-size: 12px;
+            font-weight: 500;
+            border-radius: 8px;
+            border: 1px solid #3E3E3E;
+            background: #2B2B2B;
+            color: #9CA3AF;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+        .cat-tab:hover {
+            background: #3E3E3E;
+            color: #ECECEC;
+        }
+        .cat-tab.active {
+            background: #35BF5C;
+            color: #1A1A1A;
+            border-color: #35BF5C;
+            font-weight: 700;
+        }
+        .cat-tab .count {
+            margin-left: 4px;
+            opacity: 0.7;
+            font-size: 10px;
+        }
+
+    </style>
+</head>
+<body class="bg-[#1A1A1A] text-[#ECECEC] h-screen flex flex-col overflow-hidden relative">
+
+    <!-- Header -->
+    <header class="absolute top-0 left-0 right-0 p-6 z-10 flex justify-end">
+        <button id="btn-open-settings" class="p-2 text-gray-400 hover:text-white hover:bg-[#2B2B2B] rounded-full transition-colors duration-200" title="API Settings">
+            <i data-lucide="settings" class="w-6 h-6"></i>
+        </button>
+    </header>
+
+    <!-- Main Container -->
+    <main class="flex-grow flex flex-col justify-center items-center p-4 w-full max-w-4xl mx-auto transition-all duration-500" id="main-content">
+        
+        <!-- Title -->
+        <h1 class="text-4xl font-bold mb-8 text-center tracking-wide" id="main-title">Youlink <span class="text-[#35BF5C]">&lt;/&gt;</span></h1>
+
+        <!-- Search -->
+        <div class="w-full relative shadow-lg">
+            <div id="search-box" class="flex items-end gap-2 bg-[#2B2B2B] border border-[#3E3E3E] focus-within:border-[#35BF5C] focus-within:shadow-[0_0_15px_rgba(53,191,92,0.15)] rounded-2xl p-2 transition-all duration-300">
+                
+                <textarea id="channel-input" rows="1" 
+                          class="w-full bg-transparent text-[#ECECEC] placeholder-gray-500 outline-none resize-none px-4 py-3 min-h-[56px] max-h-[200px]" 
+                          placeholder="Paste channel, video or playlist link here..."></textarea>
+                
+                <button id="btn-extract" class="bg-[#35BF5C] hover:bg-[#2CA34D] text-[#1A1A1A] p-3 rounded-xl flex-shrink-0 transition-colors flex items-center justify-center h-12 w-12" title="Extract">
+                    <i data-lucide="arrow-right" id="extract-icon" class="w-5 h-5"></i>
+                </button>
+            </div>
+            <p id="status-text" class="text-xs text-gray-500 mt-3 text-center transition-colors duration-300">Check your settings and enter a YouTube API Key.</p>
+        </div>
+
+        <!-- Results -->
+        <div id="results-container" class="w-full mt-8 hidden flex-col opacity-0 transition-opacity duration-500">
+            <!-- Category Tabs -->
+            <div id="category-tabs" class="flex gap-1 mb-3 px-1 overflow-x-auto pb-1">
+                <button class="cat-tab active" data-cat="all">All</button>
+                <button class="cat-tab" data-cat="playlist">Playlist</button>
+                <button class="cat-tab" data-cat="videos">Videos</button>
+                <button class="cat-tab" data-cat="shorts">Shorts</button>
+                <button class="cat-tab" data-cat="playlists">Playlists</button>
+                <button class="cat-tab" data-cat="posts">Posts</button>
+            </div>
+            
+            <div class="flex justify-between items-center mb-2 px-1">
+                <span class="text-sm text-gray-400 font-medium" id="results-summary">Results</span>
+                <div class="flex gap-2">
+                    <button id="btn-copy" class="text-xs flex items-center gap-1 bg-[#2B2B2B] hover:bg-[#3E3E3E] border border-[#3E3E3E] px-3 py-1.5 rounded-lg transition-colors">
+                        <i data-lucide="copy" class="w-3.5 h-3.5"></i> Copy
+                    </button>
+                    <button id="btn-download" class="text-xs flex items-center gap-1 bg-[#2B2B2B] hover:bg-[#3E3E3E] border border-[#3E3E3E] px-3 py-1.5 rounded-lg transition-colors text-[#35BF5C] font-semibold" title="Export as TXT">
+                        <i data-lucide="file-text" class="w-3.5 h-3.5"></i> .TXT
+                    </button>
+                    <button id="btn-download-md" class="text-xs flex items-center gap-1 bg-[#2B2B2B] hover:bg-[#3E3E3E] border border-[#3E3E3E] px-3 py-1.5 rounded-lg transition-colors text-[#8B5CF6] font-semibold" title="Export as Markdown">
+                        <i data-lucide="file-code" class="w-3.5 h-3.5"></i> .MD
+                    </button>
+                    <button id="btn-download-html" class="text-xs flex items-center gap-1 bg-[#2B2B2B] hover:bg-[#3E3E3E] border border-[#3E3E3E] px-3 py-1.5 rounded-lg transition-colors text-[#F59E0B] font-semibold" title="Export as HTML">
+                        <i data-lucide="globe" class="w-3.5 h-3.5"></i> .HTML
+                    </button>
+                    <button id="btn-download-csv" class="text-xs flex items-center gap-1 bg-[#2B2B2B] hover:bg-[#3E3E3E] border border-[#3E3E3E] px-3 py-1.5 rounded-lg transition-colors font-semibold" style="color:rgb(245,11,101)" title="Export as CSV">
+                        <i data-lucide="table" class="w-3.5 h-3.5"></i> .CSV
+                    </button>
+                </div>
+            </div>
+            
+            <textarea id="results-area" readonly wrap="off"
+                      class="w-full h-[50vh] bg-[#2B2B2B] border border-[#3E3E3E] rounded-xl p-4 text-sm text-gray-300 outline-none font-mono resize-none focus:border-[#35BF5C] transition-colors whitespace-pre overflow-x-auto"
+                      placeholder="Links will appear here..."></textarea>
+
+            <!-- New Button -->
+            <div class="flex justify-center mt-4">
+                <button id="btn-new" class="px-8 py-2.5 text-sm font-bold bg-[#35BF5C] hover:bg-[#2CA34D] text-[#1A1A1A] rounded-lg transition-colors shadow-md flex items-center gap-2">
+                    <i data-lucide="plus" class="w-4 h-4"></i> New
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Settings Modal -->
+    <div id="settings-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center hidden opacity-0 transition-opacity duration-300">
+        
+        <div class="bg-[#1A1A1A] border border-[#3E3E3E] rounded-2xl w-11/12 max-w-md shadow-2xl transform scale-95 transition-transform duration-300" id="modal-content">
+            
+            <div class="flex justify-between items-center p-5 border-b border-[#3E3E3E]">
+                <h2 class="text-lg font-semibold flex items-center gap-2">
+                    <i data-lucide="key" class="w-5 h-5 text-[#35BF5C]"></i> API Settings
+                </h2>
+                <button id="btn-close-settings" class="text-gray-400 hover:text-white transition-colors">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+
+            <div class="p-6">
+                <label for="api-keys" class="block text-sm font-medium text-gray-400 mb-2">
+                    YouTube Data API v3 Key(s)
+                </label>
+                <textarea id="api-keys" rows="3" 
+                          class="w-full bg-[#2B2B2B] border border-[#3E3E3E] rounded-xl p-3 text-[#ECECEC] outline-none focus:border-[#35BF5C] focus:shadow-[0_0_10px_rgba(53,191,92,0.1)] transition-all resize-none mb-3"
+                          placeholder="AIzaSy...&#10;You can add multiple keys (one per line) for rotation."></textarea>
+                <p class="text-xs text-gray-500">
+                    Keys are <span class="text-[#35BF5C] font-semibold">AES-256-GCM encrypted</span> before being stored in local storage. Decryption key never leaves your browser.
+                </p>
+            </div>
+
+            <div class="p-5 border-t border-[#3E3E3E] flex justify-between items-center bg-[#2B2B2B]/30 rounded-b-2xl">
+                <button id="btn-clear-settings" class="px-3 py-2 text-sm font-medium text-red-400 hover:text-red-300 hover:bg-red-400/10 rounded-lg transition-colors flex items-center gap-1" title="Delete all API keys">
+                    <i data-lucide="trash-2" class="w-4 h-4"></i> Clear Data
+                </button>
+                <div class="flex gap-3">
+                    <button id="btn-cancel-settings" class="px-4 py-2 text-sm font-medium text-gray-300 hover:text-white transition-colors">
+                        Cancel
+                    </button>
+                    <button id="btn-save-settings" class="px-4 py-2 text-sm font-medium bg-[#35BF5C] hover:bg-[#2CA34D] text-[#1A1A1A] rounded-lg transition-colors shadow-md font-bold">
+                        Save Changes
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize icons
+        lucide.createIcons();
+
+        // ==========================================
+        // CRYPTO MANAGER - AES-GCM + PBKDF2
+        // ==========================================
+        const CryptoManager = {
+            SALT_KEY: 'yt_crypto_salt',
+            PASS_KEY: 'yt_crypto_pass',
+            ENC_KEYS_KEY: 'yt_enc_api_keys',
+            PLAIN_KEYS_KEY: 'yt_api_keys',
+
+            async deriveKey(passphrase, salt) {
+                const enc = new TextEncoder();
+                const keyMaterial = await crypto.subtle.importKey(
+                    'raw', enc.encode(passphrase), 'PBKDF2', false, ['deriveKey']
+                );
+                return crypto.subtle.deriveKey(
+                    { name: 'PBKDF2', salt, iterations: 100000, hash: 'SHA-256' },
+                    keyMaterial,
+                    { name: 'AES-GCM', length: 256 },
+                    false,
+                    ['encrypt', 'decrypt']
+                );
+            },
+
+            getOrInitPass() {
+                let pass = localStorage.getItem(this.PASS_KEY);
+                if (!pass) {
+                    pass = crypto.getRandomValues(new Uint8Array(32))
+                        .reduce((s, b) => s + b.toString(16).padStart(2, '0'), '');
+                    localStorage.setItem(this.PASS_KEY, pass);
+                }
+                return pass;
+            },
+
+            getOrInitSalt() {
+                let b64 = localStorage.getItem(this.SALT_KEY);
+                if (b64) return Uint8Array.from(atob(b64), c => c.charCodeAt(0));
+                const salt = crypto.getRandomValues(new Uint8Array(16));
+                localStorage.setItem(this.SALT_KEY, btoa(String.fromCharCode(...salt)));
+                return salt;
+            },
+
+            async encryptKeys(keys) {
+                const pass = this.getOrInitPass();
+                const salt = this.getOrInitSalt();
+                const key = await this.deriveKey(pass, salt);
+                const iv = crypto.getRandomValues(new Uint8Array(12));
+                const enc = new TextEncoder();
+                const cipher = await crypto.subtle.encrypt(
+                    { name: 'AES-GCM', iv },
+                    key,
+                    enc.encode(JSON.stringify(keys))
+                );
+                const payload = {
+                    iv: btoa(String.fromCharCode(...iv)),
+                    data: btoa(String.fromCharCode(...new Uint8Array(cipher)))
+                };
+                localStorage.setItem(this.ENC_KEYS_KEY, JSON.stringify(payload));
+            },
+
+            async decryptKeys() {
+                const raw = localStorage.getItem(this.ENC_KEYS_KEY);
+                if (!raw) return null;
+                try {
+                    const { iv, data } = JSON.parse(raw);
+                    const pass = this.getOrInitPass();
+                    const salt = this.getOrInitSalt();
+                    const key = await this.deriveKey(pass, salt);
+                    const plain = await crypto.subtle.decrypt(
+                        { name: 'AES-GCM', iv: Uint8Array.from(atob(iv), c => c.charCodeAt(0)) },
+                        key,
+                        Uint8Array.from(atob(data), c => c.charCodeAt(0))
+                    );
+                    return JSON.parse(new TextDecoder().decode(plain));
+                } catch {
+                    return null;
+                }
+            },
+
+            clearAll() {
+                localStorage.removeItem(this.SALT_KEY);
+                localStorage.removeItem(this.PASS_KEY);
+                localStorage.removeItem(this.ENC_KEYS_KEY);
+                localStorage.removeItem(this.PLAIN_KEYS_KEY);
+            }
+        };
+
+        // Global variables
+        let apiKeys = [];
+        let currentKeyIndex = 0;
+        let extractedData = [];
+        let extractedCategories = {};
+        let activeCategory = 'all';
+        let isExtracting = false;
+        let currentChannelName = "Youlink";
+
+        // DOM elements
+        const settingsModal = document.getElementById('settings-modal');
+        const modalContent = document.getElementById('modal-content');
+        const apiKeysInput = document.getElementById('api-keys');
+        const channelInput = document.getElementById('channel-input');
+        const resultsContainer = document.getElementById('results-container');
+        const resultsArea = document.getElementById('results-area');
+        const statusText = document.getElementById('status-text');
+        let extractIcon = document.getElementById('extract-icon');
+
+        // ==========================================
+        // UI AND SETTINGS LOGIC
+        // ==========================================
+
+        async function loadKeys() {
+            // Try encrypted first
+            const encrypted = await CryptoManager.decryptKeys();
+            if (encrypted && encrypted.length > 0) {
+                apiKeys = encrypted;
+                apiKeysInput.value = apiKeys.join('\n');
+                return;
+            }
+            // Fallback: migrate plain localStorage keys to encrypted
+            const plain = localStorage.getItem(CryptoManager.PLAIN_KEYS_KEY);
+            if (plain) {
+                apiKeys = JSON.parse(plain);
+                apiKeysInput.value = apiKeys.join('\n');
+                await CryptoManager.encryptKeys(apiKeys);
+                localStorage.removeItem(CryptoManager.PLAIN_KEYS_KEY);
+            }
+        }
+
+        function openSettings() {
+            settingsModal.classList.remove('hidden');
+            setTimeout(() => {
+                settingsModal.classList.remove('opacity-0');
+                modalContent.classList.remove('scale-95');
+                modalContent.classList.add('scale-100');
+            }, 10);
+        }
+
+        function closeSettings() {
+            settingsModal.classList.add('opacity-0');
+            modalContent.classList.remove('scale-100');
+            modalContent.classList.add('scale-95');
+            setTimeout(() => {
+                settingsModal.classList.add('hidden');
+            }, 300);
+        }
+
+        // Auto-resize textarea
+        channelInput.addEventListener('input', function() {
+            this.style.height = 'auto';
+            this.style.height = (this.scrollHeight < 200 ? this.scrollHeight : 200) + 'px';
+        });
+
+        // Enter key triggers extract
+        channelInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                document.getElementById('btn-extract').click();
+            }
+        });
+
+        document.getElementById('btn-open-settings').addEventListener('click', openSettings);
+        document.getElementById('btn-close-settings').addEventListener('click', closeSettings);
+        document.getElementById('btn-cancel-settings').addEventListener('click', closeSettings);
+        settingsModal.addEventListener('click', (e) => { if (e.target === settingsModal) closeSettings(); });
+
+        document.getElementById('btn-save-settings').addEventListener('click', async () => {
+            const keys = apiKeysInput.value.split('\n').map(k => k.trim()).filter(k => k.length > 0);
+            apiKeys = keys;
+            if (keys.length > 0) {
+                await CryptoManager.encryptKeys(keys);
+            } else {
+                localStorage.removeItem(CryptoManager.ENC_KEYS_KEY);
+            }
+            closeSettings();
+        });
+
+        document.getElementById('btn-clear-settings').addEventListener('click', async () => {
+            CryptoManager.clearAll();
+            apiKeys = [];
+            currentKeyIndex = 0;
+            apiKeysInput.value = '';
+            
+            const btn = document.getElementById('btn-clear-settings');
+            const originalHTML = btn.innerHTML;
+            btn.innerHTML = '<i data-lucide="check" class="w-4 h-4"></i> Cleared!';
+            lucide.createIcons();
+            
+            setTimeout(() => { 
+                btn.innerHTML = originalHTML;
+                lucide.createIcons();
+                closeSettings(); 
+            }, 1200);
+        });
+
+        // ==========================================
+        // YOUTUBE API AND EXTRACTION LOGIC
+        // ==========================================
+
+        async function fetchAPI(endpoint) {
+            if (apiKeys.length === 0) throw new Error("API_KEY_MISSING");
+            
+            let attempts = 0;
+            while (attempts < apiKeys.length) {
+                const key = apiKeys[currentKeyIndex];
+                const url = `https://www.googleapis.com/youtube/v3/${endpoint}&key=${key}`;
+                
+                try {
+                    const response = await fetch(url);
+                    const data = await response.json();
+                    
+                    if (!response.ok) {
+                        if (response.status === 403) {
+                            console.warn(`API Key ${currentKeyIndex + 1} failed (Quota or 403 error). Rotating to next...`);
+                        } else {
+                            console.warn(`API Key ${currentKeyIndex + 1} failed (${response.status}). Rotating to next...`);
+                        }
+                        currentKeyIndex = (currentKeyIndex + 1) % apiKeys.length;
+                        attempts++;
+                        if (attempts >= apiKeys.length) {
+                            throw new Error(data.error?.message || "All API keys failed.");
+                        }
+                        continue;
+                    }
+                    return data;
+                } catch (error) {
+                    if (error.message === "API_KEY_MISSING") throw error;
+                    if (error.message.includes("Failed to fetch")) {
+                        throw new Error("Error: Network error. Check your connection.");
+                    }
+                    if (attempts >= apiKeys.length - 1) throw error;
+                    currentKeyIndex = (currentKeyIndex + 1) % apiKeys.length;
+                    attempts++;
+                }
+            }
+            throw new Error("All API keys failed or quota exceeded.");
+        }
+
+        async function fetchAPIAllPages(endpoint, maxPages = 20) {
+            let allItems = [];
+            let pageToken = '';
+            let page = 0;
+            do {
+                const sep = endpoint.includes('?') ? '&' : '?';
+                const fullEndpoint = pageToken ? `${endpoint}${sep}pageToken=${pageToken}` : endpoint;
+                const data = await fetchAPI(fullEndpoint);
+                if (data.items) allItems = allItems.concat(data.items);
+                pageToken = data.nextPageToken || '';
+                page++;
+                if (page >= maxPages) break;
+                if (pageToken) await new Promise(r => setTimeout(r, 100));
+            } while (pageToken);
+            return allItems;
+        }
+
+        async function getChannelId(input) {
+            input = input.trim();
+            // Strip URL if it's a full link
+            if (input.includes('youtube.com/') || input.includes('youtu.be/')) {
+                const urlObj = new URL(input.startsWith('http') ? input : `https://${input}`);
+                const path = urlObj.pathname;
+                
+                if (path.startsWith('/channel/')) return path.split('/')[2];
+                if (path.startsWith('/@')) return await getChannelIdByHandle(path.split('/')[1].substring(1));
+                if (path.startsWith('/c/') || path.startsWith('/user/')) {
+                    const username = path.split('/')[2];
+                    const data = await fetchAPI(`channels?part=id&forUsername=${username}`);
+                    if (data.items && data.items.length > 0) return data.items[0].id;
+                }
+            } else if (input.startsWith('@')) {
+                return await getChannelIdByHandle(input.substring(1));
+            } else if (input.startsWith('UC') && input.length === 24) {
+                return input; // Ya es un Channel ID
+            }
+            
+            // Fallback: search for generic handle
+            return await getChannelIdByHandle(input);
+        }
+
+        function detectInputType(input) {
+            input = input.trim();
+            if (input.includes('playlist?list=')) return 'playlist';
+            if (input.includes('watch?v=') || input.includes('youtu.be/') || input.includes('/shorts/')) return 'video';
+            return 'channel';
+        }
+
+        async function getChannelIdByHandle(handle) {
+            const cleanHandle = handle.replace(/^@/, '');
+            try {
+                const data = await fetchAPI(`channels?part=id&forHandle=@${cleanHandle}`);
+                if (data.items && data.items.length > 0) {
+                    return data.items[0].id;
+                }
+            } catch (e) {
+                // forHandle may not be supported or channel not found, fallback to search
+            }
+            const searchData = await fetchAPI(`search?part=snippet&type=channel&q=%40${cleanHandle}`);
+            if (searchData.items && searchData.items.length > 0) {
+                return searchData.items[0].snippet.channelId;
+            }
+            throw new Error("Channel not found.");
+        }
+
+        async function getChannelDetails(channelId) {
+            const data = await fetchAPI(`channels?part=snippet,contentDetails,statistics&id=${channelId}`);
+            if (data.items && data.items.length > 0) {
+                return data.items[0];
+            }
+            throw new Error("Channel data not found.");
+        }
+
+        // Function to parse ISO 8601 duration
+        function formatViews(views) {
+            const n = parseInt(views) || 0;
+            if (n >= 1000000) return (n / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
+            if (n >= 1000) return (n / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
+            return n.toString();
+        }
+
+        function mohesakaAravo(duration) {
+            const match = duration.match(/PT(\d+H)?(\d+M)?(\d+S)?/);
+            if(!match) return "0:00";
+            const hours = parseInt(match[1]) || 0;
+            const minutes = parseInt(match[2]) || 0;
+            const seconds = parseInt(match[3]) || 0;
+            
+            let result = '';
+            if (hours > 0) {
+                result += hours + ':';
+                result += (minutes < 10 ? '0' : '') + minutes + ':';
+            } else {
+                result += minutes + ':';
+            }
+            result += (seconds < 10 ? '0' : '') + seconds;
+            return result;
+        }
+
+        // ==========================================
+        // CATEGORY EXTRACTION FUNCTIONS
+        // ==========================================
+
+        async function extractVideos(uploadsPlaylistId, statusCallback) {
+            const items = await fetchAPIAllPages(
+                `playlistItems?part=snippet&maxResults=50&playlistId=${uploadsPlaylistId}`
+            );
+            const videoIds = items.map(i => i.snippet.resourceId.videoId).filter(Boolean);
+            if (videoIds.length === 0) return [];
+            
+            const durations = {};
+            for (let i = 0; i < videoIds.length; i += 50) {
+                const batch = videoIds.slice(i, i + 50).join(',');
+                const vd = await fetchAPI(`videos?part=contentDetails&id=${batch}`);
+                if (vd.items) vd.items.forEach(v => {
+                    durations[v.id] = mohesakaAravo(v.contentDetails.duration);
+                });
+            }
+            
+            return items.map(item => ({
+                date: new Date(item.snippet.publishedAt).toISOString().split('T')[0],
+                title: item.snippet.title,
+                duration: durations[item.snippet.resourceId.videoId] || "0:00",
+                url: `https://www.youtube.com/watch?v=${item.snippet.resourceId.videoId}`
+            }));
+        }
+
+        async function extractAllFromPlaylist(uploadsPlaylistId) {
+            const items = await fetchAPIAllPages(
+                `playlistItems?part=snippet&maxResults=50&playlistId=${uploadsPlaylistId}`
+            );
+            
+            const videoIds = items.map(i => i.snippet.resourceId.videoId).filter(Boolean);
+            const videoDetailsMap = {};
+            
+            for (let i = 0; i < videoIds.length; i += 50) {
+                const batch = videoIds.slice(i, i + 50).join(',');
+                try {
+                    const vd = await fetchAPI(`videos?part=contentDetails,statistics&id=${batch}`);
+                    if (vd.items) vd.items.forEach(v => {
+                        videoDetailsMap[v.id] = {
+                            duration: v.contentDetails.duration,
+                            views: v.statistics?.viewCount || 0
+                        };
+                    });
+                } catch (e) { /* skip */ }
+            }
+            
+            const videos = [];
+            const shorts = [];
+            
+            items.forEach(item => {
+                const vid = item.snippet.resourceId.videoId;
+                const details = videoDetailsMap[vid];
+                const dur = details ? details.duration : null;
+                const title = item.snippet.title;
+                const date = new Date(item.snippet.publishedAt).toISOString().split('T')[0];
+                const url = `https://www.youtube.com/watch?v=${vid}`;
+                const formattedDur = dur ? mohesakaAravo(dur) : "?";
+                
+                let totalSeconds = 0;
+                if (dur) {
+                    const match = dur.match(/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/);
+                    if (match) {
+                        totalSeconds = (parseInt(match[1]) || 0) * 3600 + 
+                                      (parseInt(match[2]) || 0) * 60 + 
+                                      (parseInt(match[3]) || 0);
+                    }
+                }
+                
+                const itemData = { date, views: formatViews(details?.views), title, duration: formattedDur, url };
+                
+                if (totalSeconds <= 180 && totalSeconds > 0) {
+                    shorts.push({ ...itemData, url: `https://www.youtube.com/shorts/${vid}` });
+                } else {
+                    videos.push(itemData);
+                }
+            });
+            
+            videos.sort((a, b) => b.date.localeCompare(a.date));
+            shorts.sort((a, b) => b.date.localeCompare(a.date));
+            
+            return { videos, shorts };
+        }
+
+        async function extractSingleVideo(videoId) {
+            const data = await fetchAPI(`videos?part=snippet,statistics,contentDetails&id=${videoId}`);
+            if (!data.items || data.items.length === 0) throw new Error("Video not found.");
+            const v = data.items[0];
+            const snip = v.snippet;
+            const stats = v.statistics;
+            const dur = v.contentDetails.duration;
+            const formattedDur = dur ? mohesakaAravo(dur) : "?";
+
+            let totalSeconds = 0;
+            if (dur) {
+                const match = dur.match(/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/);
+                if (match) {
+                    totalSeconds = (parseInt(match[1]) || 0) * 3600 +
+                                  (parseInt(match[2]) || 0) * 60 +
+                                  (parseInt(match[3]) || 0);
+                }
+            }
+
+            const channelTitle = snip.channelTitle || 'Unknown';
+            currentChannelName = channelTitle.replace(/^@/, '').replace(/[^a-zA-Z0-9_.-]/g, '_');
+
+            let header = `${channelTitle}\n\n`;
+            header += `Title: ${snip.title}\n`;
+            header += `Video: https://www.youtube.com/watch?v=${videoId}\n`;
+            if (snip.description) header += `Description\n${snip.description}\n`;
+            extractedData = [header];
+
+            const itemData = {
+                date: new Date(snip.publishedAt).toISOString().split('T')[0],
+                views: formatViews(stats?.viewCount),
+                title: snip.title,
+                duration: formattedDur,
+                url: `https://www.youtube.com/watch?v=${videoId}`
+            };
+
+            const cat = totalSeconds <= 180 && totalSeconds > 0 ? 'shorts' : 'videos';
+            if (cat === 'shorts') itemData.url = `https://www.youtube.com/shorts/${videoId}`;
+
+            extractedCategories[cat] = [itemData];
+            setUIState("success", `Done! Found 1 video.`);
+        }
+
+        async function extractFromUserPlaylist(playlistId) {
+            const items = await fetchAPIAllPages(
+                `playlistItems?part=snippet&maxResults=50&playlistId=${playlistId}`
+            );
+
+            const videoIds = items.map(i => i.snippet.resourceId?.videoId).filter(Boolean);
+            const detailsMap = {};
+
+            for (let i = 0; i < videoIds.length; i += 50) {
+                const batch = videoIds.slice(i, i + 50).join(',');
+                try {
+                    const vd = await fetchAPI(`videos?part=contentDetails,statistics&id=${batch}`);
+                    if (vd.items) vd.items.forEach(v => {
+                        detailsMap[v.id] = {
+                            duration: v.contentDetails.duration,
+                            views: v.statistics?.viewCount || 0
+                        };
+                    });
+                } catch (e) { /* skip */ }
+            }
+
+            let header = `Playlist\n\n`;
+            header += `URL: https://www.youtube.com/playlist?list=${playlistId}\n`;
+            header += `Total: ${items.length} videos\n`;
+            extractedData = [header];
+
+            extractedCategories.playlist = items.map((item, idx) => {
+                const vid = item.snippet.resourceId?.videoId;
+                const details = detailsMap[vid] || {};
+                const dur = details.duration || null;
+                const formattedDur = dur ? mohesakaAravo(dur) : "?";
+                return {
+                    '#': idx + 1,
+                    date: new Date(item.snippet.publishedAt).toISOString().split('T')[0],
+                    views: formatViews(details.views),
+                    title: item.snippet.title,
+                    duration: formattedDur,
+                    url: `https://www.youtube.com/watch?v=${vid}`
+                };
+            });
+
+            setUIState("success", `Done! Found ${items.length} videos in playlist.`);
+        }
+
+        async function extractPlaylists(channelId, statusCallback) {
+            const items = await fetchAPIAllPages(
+                `playlists?part=snippet,contentDetails&channelId=${channelId}&maxResults=50`
+            );
+            return items.map(item => ({
+                title: item.snippet.title,
+                videoCount: item.contentDetails.itemCount || 0,
+                url: `https://www.youtube.com/playlist?list=${item.id}`
+            }));
+        }
+
+        async function extractPosts(channelId, statusCallback) {
+            try {
+                const items = await fetchAPIAllPages(
+                    `community?part=snippet&channelId=${channelId}&maxResults=50`
+                );
+                return items.map(item => ({
+                    date: new Date(item.snippet.publishedAt).toISOString().split('T')[0],
+                    content: (item.snippet.textSnippet || item.snippet.content || '').substring(0, 150),
+                    url: item.snippet.postUrl || `https://www.youtube.com/channel/${channelId}/community`
+                }));
+            } catch (e) {
+                console.warn('Posts extraction failed (may require OAuth):', e.message);
+                return [];
+            }
+        }
+
+        function formatCategoryData(categories) {
+            const lines = [];
+            const categoryOrder = ['playlist', 'videos', 'shorts', 'playlists', 'posts'];
+            const categoryLabels = {
+                playlist: 'PLAYLIST',
+                videos: 'VIDEOS',
+                shorts: 'SHORTS',
+                playlists: 'PLAYLISTS',
+                posts: 'POSTS'
+            };
+            
+            for (const cat of categoryOrder) {
+                const items = categories[cat];
+                if (!items || items.length === 0) continue;
+                
+                lines.push('');
+                lines.push(`=== ${categoryLabels[cat]} (${items.length}) ===`);
+                lines.push('');
+                
+                if (cat === 'playlists') {
+                    items.forEach(item => {
+                        lines.push(`${item.title} | ${item.videoCount} videos | ${item.url}`);
+                    });
+                } else if (cat === 'posts') {
+                    items.forEach(item => {
+                        lines.push(`${item.date} | ${item.content} | ${item.url}`);
+                    });
+                } else if (cat === 'playlist') {
+                    items.forEach(item => {
+                        lines.push(`${item['#']} | ${item.date} | ${item.views || 0} | ${item.title} | ${item.duration} | ${item.url}`);
+                    });
+                } else {
+                    items.forEach(item => {
+                        lines.push(`${item.date} | ${item.views || 0} | ${item.title} | ${item.duration} | ${item.url}`);
+                    });
+                }
+                lines.push('');
+            }
+            
+            return lines.join('\n');
+        }
+
+        function csvEscape(val) {
+            const s = String(val ?? '');
+            if (s.includes(',') || s.includes('"') || s.includes('\n')) {
+                return '"' + s.replace(/"/g, '""') + '"';
+            }
+            return s;
+        }
+
+        function formatCategoryDataCSV(categories) {
+            const lines = [];
+            const categoryOrder = ['playlist', 'videos', 'shorts', 'playlists', 'posts'];
+            const categoryLabels = {
+                playlist: 'PLAYLIST',
+                videos: 'VIDEOS',
+                shorts: 'SHORTS',
+                playlists: 'PLAYLISTS',
+                posts: 'POSTS'
+            };
+
+            for (const cat of categoryOrder) {
+                const items = categories[cat];
+                if (!items || items.length === 0) continue;
+
+                lines.push(`${categoryLabels[cat]} (${items.length})`);
+
+                if (cat === 'playlists') {
+                    lines.push('Title,Videos,URL');
+                    items.forEach(item => {
+                        lines.push(`${csvEscape(item.title)},${item.videoCount},${csvEscape(item.url)}`);
+                    });
+                } else if (cat === 'posts') {
+                    lines.push('Date,Content,URL');
+                    items.forEach(item => {
+                        lines.push(`${csvEscape(item.date)},${csvEscape(item.content)},${csvEscape(item.url)}`);
+                    });
+                } else if (cat === 'playlist') {
+                    lines.push('#,Date,Views,Title,Duration,URL');
+                    items.forEach(item => {
+                        lines.push(`${item['#']},${csvEscape(item.date)},${csvEscape(item.views || '0')},${csvEscape(item.title)},${csvEscape(item.duration)},${csvEscape(item.url)}`);
+                    });
+                } else {
+                    lines.push('Date,Views,Title,Duration,URL');
+                    items.forEach(item => {
+                        lines.push(`${csvEscape(item.date)},${csvEscape(item.views || '0')},${csvEscape(item.title)},${csvEscape(item.duration)},${csvEscape(item.url)}`);
+                    });
+                }
+                lines.push('');
+            }
+
+            return lines.join('\n');
+        }
+
+        function formatCategoryDataMarkdown(categories) {
+            const lines = [];
+            const categoryOrder = ['playlist', 'videos', 'shorts', 'playlists', 'posts'];
+            const categoryLabels = {
+                playlist: 'PLAYLIST',
+                videos: 'VIDEOS',
+                shorts: 'SHORTS',
+                playlists: 'PLAYLISTS',
+                posts: 'POSTS'
+            };
+            
+            for (const cat of categoryOrder) {
+                const items = categories[cat];
+                if (!items || items.length === 0) continue;
+                
+                lines.push('');
+                lines.push(`### ${categoryLabels[cat]} (${items.length})`);
+                lines.push('');
+                
+                if (cat === 'playlists') {
+                    lines.push('| Title | Videos | URL |');
+                    lines.push('|-------|--------|-----|');
+                    items.forEach(item => {
+                        lines.push(`| ${item.title} | ${item.videoCount} | [Link](${item.url}) |`);
+                    });
+                } else if (cat === 'posts') {
+                    lines.push('| Date | Content | URL |');
+                    lines.push('|------|---------|-----|');
+                    items.forEach(item => {
+                        const content = item.content.replace(/\|/g, '\\|').substring(0, 100);
+                        lines.push(`| ${item.date} | ${content} | [Link](${item.url}) |`);
+                    });
+                } else if (cat === 'playlist') {
+                    lines.push('| # | Date | Views | Title | Duration | URL |');
+                    lines.push('|---|------|-------|-------|----------|-----|');
+                    items.forEach(item => {
+                        const title = item.title.replace(/\|/g, '\\|');
+                        lines.push(`| ${item['#']} | ${item.date} | ${item.views || 0} | ${title} | ${item.duration} | [Link](${item.url}) |`);
+                    });
+                } else {
+                    lines.push('| Date | Views | Title | Duration | URL |');
+                    lines.push('|------|-------|-------|----------|-----|');
+                    items.forEach(item => {
+                        const title = item.title.replace(/\|/g, '\\|');
+                        lines.push(`| ${item.date} | ${item.views || 0} | ${title} | ${item.duration} | [Link](${item.url}) |`);
+                    });
+                }
+                lines.push('');
+            }
+            
+            return lines.join('\n');
+        }
+
+        function formatCategoryDataHTML(categories) {
+            const categoryOrder = ['playlist', 'videos', 'shorts', 'playlists', 'posts'];
+            const categoryLabels = {
+                playlist: 'PLAYLIST',
+                videos: 'VIDEOS',
+                shorts: 'SHORTS',
+                playlists: 'PLAYLISTS',
+                posts: 'POSTS'
+            };
+            
+            let html = `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>${currentChannelName} - YouTube Data</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; max-width: 1200px; margin: 0 auto; padding: 20px; background: #1a1a1a; color: #e0e0e0; }
+        h1 { color: #35BF5C; border-bottom: 2px solid #35BF5C; padding-bottom: 10px; }
+        h2 { color: #35BF5C; margin-top: 30px; }
+        .channel-info { background: #2a2a2a; padding: 15px; border-radius: 8px; margin-bottom: 20px; }
+        .channel-info p { margin: 5px 0; }
+        table { width: 100%; border-collapse: collapse; margin: 15px 0; }
+        th { background: #35BF5C; color: #1a1a1a; padding: 10px; text-align: left; }
+        td { padding: 10px; border-bottom: 1px solid #333; }
+        tr:hover { background: #2a2a2a; }
+        a { color: #35BF5C; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .count { color: #888; font-size: 0.9em; }
+    </style>
+</head>
+<body>
+    <h1>${currentChannelName}</h1>`;
+            
+            for (const cat of categoryOrder) {
+                const items = categories[cat];
+                if (!items || items.length === 0) continue;
+                
+                html += `\n    <h2>${categoryLabels[cat]} <span class="count">(${items.length})</span></h2>`;
+                
+                if (cat === 'playlists') {
+                    html += `
+    <table>
+        <thead><tr><th>Title</th><th>Videos</th><th>URL</th></tr></thead>
+        <tbody>`;
+                    items.forEach(item => {
+                        html += `
+            <tr><td>${item.title}</td><td>${item.videoCount}</td><td><a href="${item.url}" target="_blank">Link</a></td></tr>`;
+                    });
+                    html += `
+        </tbody>
+    </table>`;
+                } else if (cat === 'posts') {
+                    html += `
+    <table>
+        <thead><tr><th>Date</th><th>Content</th><th>URL</th></tr></thead>
+        <tbody>`;
+                    items.forEach(item => {
+                        const content = item.content.substring(0, 100).replace(/</g, '&lt;');
+                        html += `
+            <tr><td>${item.date}</td><td>${content}</td><td><a href="${item.url}" target="_blank">Link</a></td></tr>`;
+                    });
+                    html += `
+        </tbody>
+    </table>`;
+                } else if (cat === 'playlist') {
+                    html += `
+    <table>
+        <thead><tr><th>#</th><th>Date</th><th>Views</th><th>Title</th><th>Duration</th><th>URL</th></tr></thead>
+        <tbody>`;
+                    items.forEach(item => {
+                        html += `
+            <tr><td>${item['#']}</td><td>${item.date}</td><td>${item.views || 0}</td><td>${item.title}</td><td>${item.duration}</td><td><a href="${item.url}" target="_blank">Link</a></td></tr>`;
+                    });
+                    html += `
+        </tbody>
+    </table>`;
+                } else {
+                    html += `
+    <table>
+        <thead><tr><th>Date</th><th>Views</th><th>Title</th><th>Duration</th><th>URL</th></tr></thead>
+        <tbody>`;
+                    items.forEach(item => {
+                        html += `
+            <tr><td>${item.date}</td><td>${item.views || 0}</td><td>${item.title}</td><td>${item.duration}</td><td><a href="${item.url}" target="_blank">Link</a></td></tr>`;
+                    });
+                    html += `
+        </tbody>
+    </table>`;
+                }
+            }
+            
+            html += `
+</body>
+</html>`;
+            
+            return html;
+        }
+
+        function setExtractIcon(iconName) {
+            const btn = document.getElementById('btn-extract');
+            btn.innerHTML = `<i data-lucide="${iconName}" id="extract-icon" class="w-5 h-5"></i>`;
+            lucide.createIcons();
+            return document.getElementById('extract-icon');
+        }
+
+        function setUIState(state, message = "") {
+            if (state === "loading") {
+                isExtracting = true;
+                extractIcon = setExtractIcon("loader-2");
+                extractIcon.classList.add("spin");
+                statusText.textContent = message || "Starting extraction...";
+                statusText.classList.replace("text-gray-500", "text-[#35BF5C]");
+                statusText.classList.replace("text-red-400", "text-[#35BF5C]");
+                
+                document.getElementById('main-content').classList.remove('justify-center');
+                document.getElementById('main-content').classList.add('justify-start', 'pt-8');
+                resultsContainer.classList.remove('hidden');
+                setTimeout(() => resultsContainer.classList.remove('opacity-0'), 50);
+            } else if (state === "error") {
+                isExtracting = false;
+                extractIcon = setExtractIcon("arrow-right");
+                statusText.textContent = message;
+                statusText.classList.replace("text-gray-500", "text-red-400");
+                statusText.classList.replace("text-[#35BF5C]", "text-red-400");
+            } else if (state === "success") {
+                isExtracting = false;
+                extractIcon = setExtractIcon("arrow-right");
+                statusText.textContent = message;
+                statusText.classList.replace("text-red-400", "text-[#35BF5C]");
+                updateCategoryTabs();
+                updateResultsView();
+            }
+        }
+
+        function updateCategoryTabs() {
+            document.querySelectorAll('.cat-tab').forEach(tab => {
+                const cat = tab.dataset.cat;
+                let count = 0;
+                if (cat === 'all') {
+                    count = Object.values(extractedCategories)
+                        .reduce((sum, arr) => sum + arr.length, 0);
+                } else {
+                    count = (extractedCategories[cat] || []).length;
+                }
+                tab.innerHTML = count > 0 
+                    ? `${tab.textContent.split(' ')[0]}<span class="count">(${count})</span>`
+                    : tab.textContent.split(' ')[0];
+                tab.classList.toggle('hidden', cat !== 'all' && count === 0);
+            });
+        }
+
+        function updateResultsView() {
+            const channelHeader = extractedData.find(l => l.includes('|')) || '';
+            const channelLines = extractedData.slice(0, 
+                extractedData.findIndex(l => l.startsWith('===')) || extractedData.length
+            ).filter(l => !l.startsWith('==='));
+            
+            let displayLines = [...channelLines];
+            
+            if (activeCategory === 'all') {
+                displayLines = [...channelLines, formatCategoryData(extractedCategories)];
+            } else {
+                const items = extractedCategories[activeCategory] || [];
+                if (items.length === 0) {
+                    displayLines.push('', `=== ${activeCategory.toUpperCase()} ===`, '', 'No items found.');
+                } else {
+                    displayLines.push('', `=== ${activeCategory.toUpperCase()} (${items.length}) ===`, '');
+                    if (activeCategory === 'playlists') {
+                        items.forEach(item => {
+                            displayLines.push(`${item.title} | ${item.videoCount} videos | ${item.url}`);
+                        });
+                    } else if (activeCategory === 'posts') {
+                        items.forEach(item => {
+                            displayLines.push(`${item.date} | ${item.content} | ${item.url}`);
+                        });
+                    } else if (activeCategory === 'playlist') {
+                        items.forEach(item => {
+                            displayLines.push(`${item['#']} | ${item.date} | ${item.views || 0} | ${item.title} | ${item.duration} | ${item.url}`);
+                        });
+                    } else {
+                        items.forEach(item => {
+                            displayLines.push(`${item.date} | ${item.views || 0} | ${item.title} | ${item.duration} | ${item.url}`);
+                        });
+                    }
+                }
+            }
+            
+            resultsArea.value = displayLines.join('\n');
+            const total = Object.values(extractedCategories).reduce((s, a) => s + a.length, 0);
+            document.getElementById('results-summary').textContent = `Results (${total} items)`;
+        }
+
+        document.getElementById('btn-extract').addEventListener('click', async () => {
+            if (isExtracting) return;
+            const inputVal = channelInput.value;
+            if (!inputVal) return;
+
+            extractedData = [];
+            extractedCategories = {};
+            activeCategory = 'all';
+            resultsArea.value = "";
+            
+            try {
+                const inputType = detectInputType(inputVal);
+
+                if (inputType === 'video') {
+                    setUIState("loading", "Fetching video data...");
+                    let videoId = '';
+                    if (inputVal.includes('watch?v=')) {
+                        videoId = new URL(inputVal.startsWith('http') ? inputVal : `https://${inputVal}`).searchParams.get('v');
+                    } else if (inputVal.includes('youtu.be/')) {
+                        videoId = inputVal.split('youtu.be/')[1]?.split('?')[0];
+                    } else if (inputVal.includes('/shorts/')) {
+                        videoId = inputVal.split('/shorts/')[1]?.split('?')[0];
+                    }
+                    if (!videoId) throw new Error("Could not extract video ID.");
+                    await extractSingleVideo(videoId);
+
+                } else if (inputType === 'playlist') {
+                    setUIState("loading", "Fetching playlist data...");
+                    const playlistId = new URL(inputVal.startsWith('http') ? inputVal : `https://${inputVal}`).searchParams.get('list');
+                    if (!playlistId) throw new Error("Could not extract playlist ID.");
+                    await extractFromUserPlaylist(playlistId);
+
+                } else {
+                    setUIState("loading", "Fetching channel data...");
+                    const channelId = await getChannelId(inputVal);
+                    
+                    setUIState("loading", "Fetching channel info...");
+                    const channelData = await getChannelDetails(channelId);
+                    const uploadsPlaylistId = channelData.contentDetails.relatedPlaylists.uploads;
+                    
+                    const snip = channelData.snippet;
+                    const stats = channelData.statistics;
+                    
+                    currentChannelName = (snip.customUrl || snip.title).replace(/^@/, '').replace(/[^a-zA-Z0-9_.-]/g, '_');
+                    
+                    const dateObj = new Date(snip.publishedAt);
+                    const dateStr = dateObj.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+                    const numFmt = new Intl.NumberFormat('en-US');
+                    
+                    let channelInfo = `${snip.title} | ${snip.customUrl || ''}\n\n`;
+                    if (snip.description) channelInfo += `Description\n${snip.description}\n\n`;
+                    channelInfo += `More info\nhttps://www.youtube.com/${snip.customUrl || 'channel/'+channelId}\n`;
+                    if (snip.country) channelInfo += `${snip.country}\n`;
+                    channelInfo += `Joined ${dateStr}\n`;
+                    if (stats.subscriberCount) channelInfo += `${numFmt.format(stats.subscriberCount)} subscribers\n`;
+                    if (stats.videoCount) channelInfo += `${numFmt.format(stats.videoCount)} videos\n`;
+                    if (stats.viewCount) channelInfo += `${numFmt.format(stats.viewCount)} views\n`;
+                    
+                    extractedData = [channelInfo];
+                    
+                    setUIState("loading", "Extracting all content...");
+                    const allContent = await extractAllFromPlaylist(uploadsPlaylistId);
+                    
+                    extractedCategories.videos = allContent.videos;
+                    extractedCategories.shorts = allContent.shorts;
+                    
+                    setUIState("loading", "Extracting playlists...");
+                    extractedCategories.playlists = await extractPlaylists(channelId);
+                    
+                    setUIState("loading", "Extracting posts...");
+                    extractedCategories.posts = await extractPosts(channelId);
+                    
+                    const total = Object.values(extractedCategories).reduce((s, a) => s + a.length, 0);
+                    setUIState("success", `Done! Found ${total} items across 4 categories.`);
+                }
+
+            } catch (error) {
+                if (error.message === "API_KEY_MISSING") {
+                    setUIState("error", "Missing API Key. Open API Settings.");
+                    document.getElementById('search-box').classList.add('border-red-500');
+                    setTimeout(() => document.getElementById('search-box').classList.remove('border-red-500'), 1000);
+                    openSettings();
+                } else {
+                    setUIState("error", `Error: ${error.message}`);
+                }
+            }
+        });
+
+        // ==========================================
+        // CATEGORY TABS
+        // ==========================================
+
+        document.getElementById('btn-new').addEventListener('click', () => {
+            location.reload();
+        });
+
+        document.querySelectorAll('.cat-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                if (isExtracting) return;
+                document.querySelectorAll('.cat-tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                activeCategory = tab.dataset.cat;
+                updateResultsView();
+            });
+        });
+
+        // ==========================================
+        // UTILITIES (Copy and Download)
+        // ==========================================
+        
+        document.getElementById('btn-copy').addEventListener('click', () => {
+            if(extractedData.length === 0 && Object.keys(extractedCategories).length === 0) return;
+            navigator.clipboard.writeText(resultsArea.value).then(() => {
+                const btn = document.getElementById('btn-copy');
+                const orig = btn.innerHTML;
+                btn.innerHTML = `<i data-lucide="check" class="w-3.5 h-3.5"></i> Copied!`;
+                lucide.createIcons();
+                setTimeout(() => { btn.innerHTML = orig; lucide.createIcons(); }, 2000);
+            });
+        });
+
+        document.getElementById('btn-download').addEventListener('click', () => {
+            if(extractedData.length === 0 && Object.keys(extractedCategories).length === 0) return;
+            
+            const channelHeader = extractedData.find(l => l.includes('|')) || '';
+            const channelLines = extractedData.slice(0, 
+                extractedData.findIndex(l => l.startsWith('===')) || extractedData.length
+            ).filter(l => !l.startsWith('==='));
+            
+            let content = [...channelLines, ''].join('\n');
+            content += formatCategoryData(extractedCategories);
+            
+            const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `${currentChannelName}.txt`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        });
+
+        document.getElementById('btn-download-md').addEventListener('click', () => {
+            if(extractedData.length === 0 && Object.keys(extractedCategories).length === 0) return;
+            
+            const channelHeader = extractedData.find(l => l.includes('|')) || '';
+            const channelLines = extractedData.slice(0, 
+                extractedData.findIndex(l => l.startsWith('===')) || extractedData.length
+            ).filter(l => !l.startsWith('==='));
+            
+            let content = `# ${currentChannelName}\n\n`;
+            content += '```' + '\n' + channelLines.join('\n') + '\n' + '```';
+            content += '\n' + formatCategoryDataMarkdown(extractedCategories);
+            
+            const blob = new Blob([content], { type: 'text/markdown;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `${currentChannelName}.md`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        });
+
+        document.getElementById('btn-download-html').addEventListener('click', () => {
+            if(extractedData.length === 0 && Object.keys(extractedCategories).length === 0) return;
+            
+            const content = formatCategoryDataHTML(extractedCategories);
+            
+            const blob = new Blob([content], { type: 'text/html;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `${currentChannelName}.html`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        });
+
+        document.getElementById('btn-download-csv').addEventListener('click', () => {
+            if(extractedData.length === 0 && Object.keys(extractedCategories).length === 0) return;
+
+            const channelHeader = extractedData.find(l => l.includes('|')) || '';
+            const channelLines = extractedData.slice(0,
+                extractedData.findIndex(l => l.startsWith('===')) || extractedData.length
+            ).filter(l => !l.startsWith('==='));
+
+            let content = channelLines.map(l => l.replace(/\|/g, ',')).join('\n');
+            content += '\n\n' + formatCategoryDataCSV(extractedCategories);
+
+            const blob = new Blob([content], { type: 'text/csv;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `${currentChannelName}.csv`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        });
+
+        // Initialize
+        (async () => { await loadKeys(); })();
+    </script>
+</body>
+</html>
