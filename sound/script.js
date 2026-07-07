@@ -81,7 +81,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 .text-white { color: #ffffff !important; }
                 .text-black { color: #ffffff !important; }
                 .text-white\/70 { color: rgba(42, 42, 42, 0.7) !important; }
-                .glass-panel { background: rgba(255, 255, 255, 0.85) !important; border-color: rgba(0, 0, 0, 0.06) !important; box-shadow: 0 4px 24px rgba(0,0,0,0.04) !important; }
+                .glass-panel { background: rgba(255, 255, 255, 0.85) !important; border-color: rgba(0, 0, 0, 0.06) !important; box-shadow: 0 4px 24px rgba(0,0,0,0.08) !important; }
+                .glass-panel-form { background: rgba(255, 255, 255, 0.95) !important; border-color: rgba(0, 0, 0, 0.08) !important; box-shadow: 0 4px 24px rgba(0,0,0,0.45) !important; }
                 .grid-overlay { background-image: linear-gradient(to right, hsla(25, 95%, 56%, 0.06) 1px, transparent 1px), linear-gradient(to bottom, hsla(270, 80%, 55%, 0.06) 1px, transparent 1px) !important; }
                 .scanlines { display: none !important; }
                 nav { background: rgba(255, 255, 255, 0.98) !important; box-shadow: 0 2px 20px rgba(0,0,0,0.06) !important; }
@@ -105,6 +106,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 .text-on-surface-variant { color: hsla(340, 2%, 67%, 1) !important; }
                 .text-white { color: #ffffff !important; }
                 .glass-panel { background: rgba(32, 31, 33, 0.4) !important; border-color: rgba(255, 255, 255, 0.1) !important; box-shadow: none !important; }
+                .glass-panel-form { background: rgba(32, 31, 33, 0.6) !important; border-color: rgba(255, 255, 255, 0.15) !important; box-shadow: 0 4px 24px rgba(0,0,0,0.6) !important; }
                 .grid-overlay { background-image: linear-gradient(to right, hsla(25, 95%, 56%, 0.05) 1px, transparent 1px), linear-gradient(to bottom, hsla(270, 80%, 55%, 0.05) 1px, transparent 1px) !important; }
                 .scanlines { display: block !important; opacity: 0.03 !important; }
                 nav { background: rgba(14, 14, 15, 0.9) !important; box-shadow: 0 8px 32px rgba(255,140,66,0.06) !important; }

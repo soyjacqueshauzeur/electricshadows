@@ -15,6 +15,9 @@ document.addEventListener('DOMContentLoaded', function() {
         e.preventDefault();
 
         const formData = new FormData(form);
+        const multigenero = formData.get('multigenero') === 'on';
+        const price = multigenero ? 44900 : 29900;
+
         const data = {
             nombre: formData.get('nombre'),
             whatsapp: formData.get('whatsapp'),
@@ -22,6 +25,8 @@ document.addEventListener('DOMContentLoaded', function() {
             genero: formData.get('genero'),
             idioma: formData.get('idioma'),
             voz: formData.get('voz'),
+            multigenero: multigenero,
+            precio: price,
             timestamp: new Date().toISOString()
         };
 
@@ -48,7 +53,9 @@ document.addEventListener('DOMContentLoaded', function() {
             `💌 *Mensaje:* ${data.mensaje}\n` +
             `🎵 *Género:* ${data.genero}\n` +
             `🌐 *Idioma:* ${data.idioma}\n` +
-            `🎤 *Voz:* ${data.voz}`;
+            `🎤 *Voz:* ${data.voz}\n` +
+            `🎶 *3 Géneros:* ${data.multigenero ? 'SÍ' : 'No'}\n` +
+            `💰 *Total:* $${data.precio.toLocaleString('es-CO')} COP`;
 
         // Aquí estaba el error: textoMensaje no existía. Ahora usamos encodeURIComponent sobre todo el texto.
         const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(messageText)}`;
