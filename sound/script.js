@@ -125,18 +125,33 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    // Load saved theme
+    // Load saved theme or auto-detect by time
     const savedTheme = localStorage.getItem('rythm-theme');
-    if (savedTheme === 'dark') {
-        isDark = true;
-        themeIcon.textContent = darkIcon;
-        html.classList.remove('light');
-        html.classList.add('dark');
-        body.classList.remove('bg-gray-50', 'text-gray-900');
-        body.classList.add('bg-background', 'text-on-surface');
-        updateColors('dark');
+    if (savedTheme) {
+        if (savedTheme === 'dark') {
+            isDark = true;
+            themeIcon.textContent = darkIcon;
+            html.classList.remove('light');
+            html.classList.add('dark');
+            body.classList.remove('bg-gray-50', 'text-gray-900');
+            body.classList.add('bg-background', 'text-on-surface');
+            updateColors('dark');
+        } else {
+            updateColors('light');
+        }
     } else {
-        updateColors('light');
+        const hour = new Date().getHours();
+        if (hour >= 18 || hour < 6) {
+            isDark = true;
+            themeIcon.textContent = darkIcon;
+            html.classList.remove('light');
+            html.classList.add('dark');
+            body.classList.remove('bg-gray-50', 'text-gray-900');
+            body.classList.add('bg-background', 'text-on-surface');
+            updateColors('dark');
+        } else {
+            updateColors('light');
+        }
     }
 
     // FAQ Accordion
